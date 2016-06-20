@@ -1,5 +1,7 @@
 package jp.co.sss.crud.form;
 
+import jp.co.sss.crud.dto.UserEmpDto;
+
 import org.apache.struts.action.ActionForm;
 
 /**
@@ -72,6 +74,7 @@ public class TopForm extends ActionForm {
 	public void setFindDeptId(int findDeptId) {
 		this.findDeptId = findDeptId;
 	}
+
 
 
 

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import jp.co.sss.crud.dto.UserEmpDto;
 import jp.co.sss.crud.form.ChangeForm;
@@ -25,7 +24,7 @@ public class UpdateAction extends LookupDispatchAction {
     protected Map<String, String> getKeyMethodMap() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("button.check", "check");
-        map.put("button.complete", "complete");
+        map.put("button.finish", "finish");
 
         return map;
     }
@@ -46,18 +45,27 @@ public class UpdateAction extends LookupDispatchAction {
     }
 
 
-
-    public ActionForward complet(ActionMapping mapping, ActionForm form,
+    /**
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward finish(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        // ここに処理を書きます
 
     	ChangeForm changeForm = (ChangeForm) form;
     	EmployeeService empService = new EmployeeService();
 
     	int count = empService.updateData(changeForm);
-
-        return mapping.findForward("complete");
+    	if (count > 0){
+    		return mapping.findForward("finish");
+        }
+    	return mapping.findForward("error");
 
     }
 }

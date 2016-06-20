@@ -10,7 +10,7 @@
     <!-- LoginActionの実装 -->
     <action path="/login" name="loginForm" type="jp.co.sss.crud.action.LoginAction" scope="request" validate="true" input="/index.jsp">
       <forward name="success" path="/top.do"/>
-      <forward name="error" path="/employee/error.jsp"/>
+      <forward name="error" path="/error.jsp"/>
     </action>
     <!-- LogoutActionの実装 -->
     <action path="/logout" type="jp.co.sss.crud.action.LogoutAction">
@@ -28,25 +28,25 @@
     <action path="/change" name="topForm" type="jp.co.sss.crud.action.ChangeAction" parameter="method">
       <forward name="create" path="/employee/create.jsp"/>
       <forward name="update" path="/employee/update.jsp"/>
-      <forward name="delete" path="/employee/chkDelete.jsp"/>
+	 <forward name="delete" path="/employee/chkDelete.jsp"/>
+	 <forward name="top" path="/top.do"/>
     </action>
     <!-- CreateActionの実装 -->
     <action path="/create" name="changeForm" type="jp.co.sss.crud.action.CreateAction" parameter="method">
       <forward name="check" path="/employee/chkCreate.jsp"/>
-      <forward name="complete" path="/employee/finCreate.jsp"/>
-      <forward name="top" path="/top.do"/>
+      <forward name="finish" path="/employee/finCreate.jsp"/>
+
     </action>
     <!-- UpdateActionの実装 -->
     <action path="/update" name="changeForm" type="jp.co.sss.crud.action.UpdateAction" parameter="method">
       <forward name="check" path="/employee/chkUpdate.jsp"/>
-      <forward name="complete" path="/employee/finUpdate.jsp"/>
+      <forward name="finish" path="/employee/finUpdate.jsp"/>
       <forward name="top" path="/top.do"/>
     </action>
     <!-- deleteActionの実装 -->
-    <action path="/delete" name="changeForm" type="jp.co.sss.crud.action.DeleteAction" parameter="method">
-
-      <forward name="complete" path= "/employee/finDelete.jsp"/>
-      <forward name="top" path="/top.do"/>
+    <action path="/delete" name="topForm" type="jp.co.sss.crud.action.DeleteAction" parameter="method">
+      <forward name="check" path="/employee/chkDelete.jsp"/>
+      <forward name="finish" path="/employee/finDelete.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

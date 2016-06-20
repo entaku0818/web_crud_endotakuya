@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.co.sss.crud.dto.UserEmpDto;
 import jp.co.sss.crud.form.ChangeForm;
 import jp.co.sss.crud.form.TopForm;
 import jp.co.sss.crud.service.EmployeeService;
@@ -25,34 +24,31 @@ public class DeleteAction extends LookupDispatchAction {
 
     protected Map<String, String> getKeyMethodMap() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("button.delete.check", "check");
-        map.put("button.delete.finish", "complete");
+        map.put("button.finish", "finish");
 
         return map;
     }
 
-    public ActionForward check(ActionMapping mapping, ActionForm form,
+
+
+
+    public ActionForward finish(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
 
-
-        return mapping.findForward("check");
-    }
-
-
-
-    public ActionForward complete(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-
-
-    	ChangeForm changeForm = (ChangeForm) form;
+    	TopForm topForm = (TopForm) form;
     	EmployeeService empService = new EmployeeService();
 
-    	int count = empService.deleteData(changeForm);
+        //取得したemployeeデータをリクエストへsetする
+    	int count = empService.deleteData(topForm.getFindId());
 
-        return mapping.findForward("complete");
+    	if(count ==1){
+    		 return mapping.findForward("finish");
+    	}
+        return mapping.findForward("error");
 
     }
+
+
 }

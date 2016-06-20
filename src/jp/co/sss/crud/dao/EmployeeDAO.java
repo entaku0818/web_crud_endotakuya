@@ -148,7 +148,11 @@ public class EmployeeDAO {
 		return empData;
 	}
 
-
+	/**
+	 *
+	 * @param empEntity
+	 * @return
+	 */
 	public int insert(Employee empEntity) {
 		String sql = "INSERT INTO employee (emp_id, emp_pass, emp_name, gender, address, birthday, authority, dept_id) " +
 				"VALUES (SEQ_EMP.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
@@ -158,15 +162,18 @@ public class EmployeeDAO {
 
 
 
-		empCount = access.update(sql, empEntity);
+		empCount = access.insert(sql, empEntity);
 
 		return empCount;
 	}
 
-
+	/**
+	 *
+	 * @param empEntity
+	 * @return
+	 */
 	public int update(Employee empEntity) {
-		String sql = "UPDATE INTO employee (emp_id, emp_pass, emp_name, gender, address, birthday, authority, dept_id) " +
-				"VALUES (SEQ_EMP.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "UPDATE employee SET emp_pass = ?, emp_name = ?, gender = ?, address = ?, birthday = ?, authority = ?, dept_id = ? WHERE emp_id = ?";
 
 		DBAccess access = new DBAccess();
 		int empCount = 0;
@@ -180,18 +187,6 @@ public class EmployeeDAO {
 
 
 
-	public int delete(Employee empEntity) {
-		String sql = "DELETE FROM employee WHERE emp_id = ?";
-
-		DBAccess access = new DBAccess();
-		int empCount = 0;
-
-
-
-		empCount = access.delete(sql, empEntity);
-
-		return empCount;
-	}
 
 
 	//動作確認用
@@ -202,6 +197,21 @@ public class EmployeeDAO {
 	    	Employee emp = list.get(i);
 	        System.out.println(emp.getEmpId());
 	    }
+	}
+
+
+	public int deleteById(int empId) {
+		// TODO 自動生成されたメソッド・スタブ
+		String sql = "DELETE FROM employee WHERE emp_id = ?";
+
+		DBAccess access = new DBAccess();
+		int empCount = 0;
+
+
+
+		empCount = access.delete(sql, empId);
+
+		return empCount;
 	}
 
 

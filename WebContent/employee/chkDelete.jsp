@@ -47,15 +47,15 @@
 									<p>権限: ${userEmpDto.authorityName}<p>
 									<p>部署名: ${userEmpDto.deptName}<p>
 
-					<html:submit property="method" value='OK'>
-							<html:hidden property="userEmpDto" />
-                            <bean:message key="button.delete.finish"/>
+					<html:submit property="method" value="OK">
+							<html:hidden property="userEmpDto" value="${userEmpDto}"/>
+                            <bean:message key="button.finish"/>
                     </html:submit>
 
 
 				</html:form>
 
-			<!-- 登録内容Check ↑-->
+			<!-- 削除内容Check ↑-->
 
 
 					</div>

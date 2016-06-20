@@ -1,7 +1,6 @@
 package jp.co.sss.crud.form;
 
 
-import jp.co.sss.crud.dto.UserEmpDto;
 
 import org.apache.struts.action.ActionForm;
 
@@ -45,7 +44,6 @@ public class ChangeForm extends ActionForm {
      */
     private int deptId;
 
-    private UserEmpDto userEmpDto;
 
 
 
@@ -148,16 +146,6 @@ public class ChangeForm extends ActionForm {
 	/**
 	 * @return userEmpDto
 	 */
-	public UserEmpDto getUserEmpDto() {
-		return userEmpDto;
-	}
-	/**
-	 * @param userEmpDto セットする userEmpDto
-	 */
-	public void setUserEmpDto(UserEmpDto userEmpDto) {
-		this.userEmpDto = userEmpDto;
-	}
-
 
 
 

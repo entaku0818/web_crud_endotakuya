@@ -48,8 +48,7 @@
 									<p>部署名: ${userEmpDto.deptName}<p>
 
 					<html:submit property="method" value='OK'>
-							<html:hidden property="userEmpDto" />
-                            <bean:message key="button.complete"/>
+                            <bean:message key="button.finish"/>
                     </html:submit>
 
 

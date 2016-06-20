@@ -38,6 +38,10 @@
 			<!-- 変更フォーム ↓-->
 				<html:form method="POST" action="/update.do" onsubmit="return changeCheck()">
 					<p>
+		    			<html:hidden property="empId" value="${userEmpDto.empId}"/>
+
+	    			</p>
+					<p>
 		    			パスワード
 		    			<html:text property="empPass" value="${userEmpDto.empPass}"/>
 
@@ -49,9 +53,12 @@
 	    			</p>
 					<p>
 		    			性別
-		    				${userEmpDto.gender}
-		    				<input type="radio" id="gender" name="gender" value="1" checked="checked">男
-			    			<input type="radio" id="gender" name="gender" value="2" >女
+		    				<input type="radio" id="gender" name="gender" value="1"
+		    					<c:if test="${userEmpDto.gender==1}" >checked</c:if>
+		    				>男
+			    			<input type="radio" id="gender" name="gender" value="2"
+			    			<c:if test="${userEmpDto.gender==2}" >checked</c:if>
+			    			>女
 	    			</p>
 					<p>
 		    			住所
@@ -62,9 +69,14 @@
 		    			<input type="text" name="birthday" value="${userEmpDto.birthday}">
 	    			</p>
 	    			<p>
-		    			権限 ${userEmpDto.authority}
-		    				<input type="radio" id="authority" name="authority" value="1" checked="checked">管理者
-			    			<input type="radio" id="authority" name="authority" value="2" >一般
+		    			権限
+		    				<input type="radio" id="authority" name="authority" value="1"
+			    				<c:if test="${userEmpDto.authority==1}" >checked</c:if>
+
+		    				>一般
+			    			<input type="radio" id="authority" name="authority" value="2"
+			    				<c:if test="${userEmpDto.authority==2}" >checked</c:if>
+							>管理者
 	    			</p>
 	    			<p>
 		    			部署ID

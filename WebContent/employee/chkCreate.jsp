@@ -37,7 +37,7 @@
 
 			<!-- 登録内容Check ↓-->
 
-				<html:form method="POST" action="${action}.do" onsubmit="return changeCheck()">
+				<html:form method="POST" action="/create.do" onsubmit="return changeCheck()">
 
 									<p>社員名: ${userEmpDto.empName}</p>
 									<p>パスワード: ${userEmpDto.empPass}</p>
@@ -48,8 +48,7 @@
 									<p>部署名: ${userEmpDto.deptName}<p>
 
 					<html:submit property="method" value='OK'>
-							<html:hidden property="userEmpDto" />
-                            <bean:message key="button.complete"/>
+                            <bean:message key="button.finish"/>
                     </html:submit>
 
 

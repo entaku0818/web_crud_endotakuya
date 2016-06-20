@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.co.sss.crud.dto.UserEmpDto;
 import jp.co.sss.crud.form.ChangeForm;
@@ -21,6 +22,7 @@ public class ChangeAction extends LookupDispatchAction {
 
     protected Map<String, String> getKeyMethodMap() {
         Map<String, String> map = new HashMap<String, String>();
+        map.put("button.top", "top");
         map.put("button.create", "create");
         map.put("button.update", "update");
         map.put("button.delete", "delete");
@@ -43,7 +45,15 @@ public class ChangeAction extends LookupDispatchAction {
 
 
 
-
+    /**
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ActionForward update(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -74,15 +84,21 @@ public class ChangeAction extends LookupDispatchAction {
     	return mapping.findForward("update");
     }
 
-
-
-
+    /**
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ActionForward delete(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        // ここに処理を書きます
 
-    	TopForm topForm = (TopForm) form;
+
+        TopForm topForm = (TopForm) form;
 
     	UserEmpDto findEmp = new UserEmpDto();
     	findEmp.setEmpId(topForm.getFindId());
@@ -91,12 +107,37 @@ public class ChangeAction extends LookupDispatchAction {
 
     	EmployeeService empService = new EmployeeService();
 
-    	//Topページで指定したFindIdのデータを取得
+    	//Topページで指定したFindIdのemployeeデータを取得
         UserEmpDto userEmpDto = empService.getEmpData("empId",  findEmp);
 
+        //取得したemployeeデータをリクエストへsetする
     	request.setAttribute("userEmpDto", userEmpDto);
 
 
         return mapping.findForward("delete");
+
+
     }
+
+    /**
+     * TopActionへ遷移させる
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public ActionForward top(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+
+    	//TopActionへ遷移させる
+
+
+        return mapping.findForward("top");
+    }
+
+
 }

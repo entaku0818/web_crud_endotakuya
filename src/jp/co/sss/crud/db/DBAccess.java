@@ -1,6 +1,7 @@
 package jp.co.sss.crud.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.co.sss.crud.entity.Employee;
+import jp.co.sss.crud.util.DateFormat;
 
 public class DBAccess {
 
@@ -43,7 +45,6 @@ public class DBAccess {
 
 
 		    } catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}finally{
 
@@ -136,7 +137,6 @@ public class DBAccess {
 
 
 		    } catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}finally{
 
@@ -158,7 +158,7 @@ public class DBAccess {
 		 * @return
 		 */
 
-		public int update(String sql, Employee empEntity) {
+		public int insert(String sql, Employee empEntity) {
 
 	    	Connection conn = null;
 	    	PreparedStatement ps = null;
@@ -177,7 +177,7 @@ public class DBAccess {
 	            ps.setString(4, empEntity.getAddress());
 	            //Date@java→Date@SQLへ変換する
 	            DateFormat dateFormat = new DateFormat();
-	            ps.setDate(5, dateFormat.chgDateToSql( ( empEntity.getBirthday() ) ) );
+	            ps.setString(5, dateFormat.chgDateToSql(empEntity.getBirthday()) );
 	            ps.setInt(6, empEntity.getAuthority());
 	            ps.setInt(7, empEntity.getDeptId());
 
@@ -204,14 +204,60 @@ public class DBAccess {
 			return sqlCount;
 		}
 
+
+		/**
+		 *
+		 * @param sql
+		 * @param empEntity
+		 * @return
+		 */
+		public int update(String sql, Employee empEntity) {
+
+	    	Connection conn = null;
+	    	PreparedStatement ps = null;
+		    int sqlCount = 0;
+	    	DBManager manager = new DBManager();
+
+			try{
+
+				conn = manager.getConn();
+	            ps = conn.prepareStatement(sql);
+
+
+	        	ps.setString(1, empEntity.getEmpPass());
+	            ps.setString(2, empEntity.getEmpName());
+	            ps.setInt(3, empEntity.getGender());
+	            ps.setString(4, empEntity.getAddress());
+	            //Date@java→Date@SQLへ変換する
+	            DateFormat dateFormat = new DateFormat();
+	            ps.setString(5, dateFormat.chgDateToSql(empEntity.getBirthday()) );
+	            ps.setInt(6, empEntity.getAuthority());
+	            ps.setInt(7, empEntity.getDeptId());
+	            ps.setInt(8, empEntity.getEmpId());
+
+	            sqlCount = ps.executeUpdate();
+
+
+		    } catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+
+	            if (conn != null) {
+	                try {conn.close();} catch (SQLException igonre) {}
+	            }
+		    }
+
+
+			return sqlCount;
+		}
+
 		/**
 		 *
 		 * @param sql
 		 * @param empId
 		 * @return
 		 */
-		public int delete(String sql, Employee empEntity) {
-			// TODO 自動生成されたメソッド・スタブ
+		public int delete(String sql, int empId) {
 			Connection conn = null;
 	    	PreparedStatement ps = null;
 		    int sqlCount = 0;
@@ -223,7 +269,7 @@ public class DBAccess {
 	            ps = conn.prepareStatement(sql);
 
 
-	        	ps.setInt(1, empEntity.getEmpId());
+	        	ps.setInt(1, empId);
 
 
 	            sqlCount = ps.executeUpdate();

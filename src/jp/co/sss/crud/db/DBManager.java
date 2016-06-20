@@ -47,7 +47,6 @@ public class DBManager {
                     "web_crud_user", "systemsss");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("DBに接続できませんでした");
         }
         return conn;
     }
@@ -65,7 +64,6 @@ public class DBManager {
             // 切断処理
             if (conn != null) {
                 conn.close();
-                // System.out.println("切断しました");
             }
         } catch (SQLException e) {
             e.printStackTrace();

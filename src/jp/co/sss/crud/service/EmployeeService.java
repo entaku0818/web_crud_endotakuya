@@ -122,7 +122,6 @@ public class EmployeeService {
 	 * @return
 	 */
 	public int createData(ChangeForm changeForm ) {
-
 		EmployeeDAO empDao = new EmployeeDAO();
 		int count = empDao.insert( this.setEntityFromForm(changeForm) );
 
@@ -130,9 +129,13 @@ public class EmployeeService {
 
 	}
 
-
+	/**
+	 * changeFormで受け取ったデータを更新するメソッド
+	 * @param empId
+	 * @param ChangeForm
+	 * @return
+	 */
 	public int updateData(ChangeForm changeForm) {
-		// TODO 自動生成されたメソッド・スタブ
 		EmployeeDAO empDao = new EmployeeDAO();
 		int count = empDao.update( this.setEntityFromForm(changeForm) );
 
@@ -140,12 +143,18 @@ public class EmployeeService {
 
 	}
 
-	public int deleteData(ChangeForm changeForm) {
+	/**
+	 * TopFormで受け取ったデータを更新するメソッド
+	 * @param empId
+	 * @param ChangeForm
+	 * @return
+	 */
+	public int deleteData(int empId) {
 		// TODO 自動生成されたメソッド・スタブ
 		EmployeeDAO empDao = new EmployeeDAO();
 
 		//entityをDaoへ渡す
-		int count = empDao.delete( this.setEntityFromForm(changeForm) );
+		int count = empDao.deleteById(empId);
 
 		return count;
 
@@ -154,7 +163,7 @@ public class EmployeeService {
 
 
 	/**
-	 *
+	 *	Entityへ格納されているデータを
 	 * @param empDto
 	 * @param empEntity
 	 * @return
@@ -183,11 +192,8 @@ public class EmployeeService {
 
 			empDto[i].setAddress(empEntity.get(i).getAddress());
 			empDto[i].setBirthday( sdf.format(empEntity.get(i).getBirthday()) );
-			if(empEntity.get(i).getAuthority()==1){
-				empDto[i].setAuthorityName("一般");
-			}else if(empEntity.get(i).getAuthority()==2){
-				empDto[i].setAuthorityName("管理");
-			}
+
+			empDto[i].setAuthorityName( this.getAuthorityName(empEntity.get(i).getAuthority()) );
 
 			// DepartmentDAO経由でDepartmentテーブルから部署名を取得する
 			empDto[i].setDeptName( deptDao.findById( empEntity.get(i).getDeptId() ).getDeptName() );
@@ -198,6 +204,23 @@ public class EmployeeService {
 
 		return empDto;
 	}
+
+	/**
+	 *
+	 * @param authority
+	 * @return
+	 */
+	private String getAuthorityName(int authority) {
+
+		if(authority == 1){
+			return "一般";
+		}else if(authority == 2){
+			return "管理";
+		}
+
+		return null;
+	}
+
 
 
 	/**
@@ -226,11 +249,9 @@ public class EmployeeService {
 
 			empDto.setAddress(empEntity.getAddress());
 			empDto.setBirthday( sdf.format(empEntity.getBirthday()) );
-			if(empEntity.getAuthority()==1){
-				empDto.setAuthorityName("一般");
-			}else if(empEntity.getAuthority()==2){
-				empDto.setAuthorityName("管理");
-			}
+
+			empDto.setAuthorityName( this.getAuthorityName(empEntity.getAuthority()) );
+
 			empDto.setAuthority(empEntity.getAuthority());
 
 			empDto.setDeptId(empEntity.getDeptId());
@@ -260,14 +281,16 @@ public class EmployeeService {
 			empEntity.setEmpName(changeForm.getEmpName());
 			empEntity.setGender(changeForm.getGender());
 			empEntity.setAddress(changeForm.getAddress());
-			try {
-				empEntity.setBirthday(
-						sdf.parse(changeForm.getBirthday())
 
-						);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+				try {
+					empEntity.setBirthday(
+							sdf.parse(changeForm.getBirthday())
+							);
+				} catch (ParseException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+
 			empEntity.setAuthority(changeForm.getAuthority());
 			empEntity.setDeptId( changeForm.getDeptId() );
 
@@ -301,11 +324,8 @@ public class EmployeeService {
 			empDto.setBirthday(changeForm.getBirthday());
 
 			empDto.setAuthority(changeForm.getAuthority());
-			if(changeForm.getAuthority()==1){
-				empDto.setAuthorityName("一般");
-			}else if(changeForm.getAuthority()==2){
-				empDto.setAuthorityName("管理");
-			}
+			empDto.setAuthorityName( this.getAuthorityName(changeForm.getAuthority()) );
+
 
 			empDto.setEmpName(changeForm.getEmpName());
 			empDto.setDeptId( changeForm.getDeptId() );

@@ -46,7 +46,7 @@
 
 
 			登録完了しました！！！！
-				<html:form method="POST" action="/update.do" >
+				<html:form method="POST" action="/change.do" >
 						<html:submit property="method" >
                             <bean:message key="button.top" />
                     	</html:submit>

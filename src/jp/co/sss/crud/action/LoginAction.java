@@ -33,8 +33,8 @@ public class LoginAction extends Action {
 
         	//Httpセッションへログイン情報を格納する
             HttpSession session = request.getSession(true);
-            request.setAttribute("id", id);
-            request.setAttribute("session", session.getId());
+            session.setAttribute("id", id);
+            session.setAttribute("session", session.getId());
 
 
         	return mapping.findForward("success");
