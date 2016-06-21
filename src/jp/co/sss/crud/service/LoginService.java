@@ -8,23 +8,45 @@ import jp.co.sss.crud.entity.Employee;
 
 public class LoginService {
 
-
+	/**
+	 * ログインをするメソッド
+	 * @param id
+	 * @param password
+	 * @return
+	 */
 	public boolean login(int id, String password)  {
 
 
-		Employee loginData = null;
+		Employee loginData = new Employee();
 		EmployeeDAO loginDao = new EmployeeDAO();
 
 		//loginに使用するEmployeeテーブルデータを格納する
 		loginData = loginDao.findById(id);
 
 		//取得したデータのpasswordと引数で与えられたpasswordがマッチしているか確認する
-		if(loginData.getEmpPass().equals(password)){
+		if( loginData.getEmpPass().equals(password) ){
 			return true;
 		}
 
 
 		return false;
+	}
+	/**
+	 * ログインしたときの権限を取得するメソッド
+	 * @param id
+	 * @return
+	 */
+	public int getAuthority(int id) {
+		Employee loginData = new Employee();
+		EmployeeDAO loginDao = new EmployeeDAO();
+
+		//loginに使用するEmployeeテーブルデータを格納する
+		loginData = loginDao.findById(id);
+
+		//取得したデータのpasswordと引数で与えられたpasswordがマッチしているか確認する
+
+
+		return loginData.getAuthority();
 	}
 
 

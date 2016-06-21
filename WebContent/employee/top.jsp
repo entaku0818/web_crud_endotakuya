@@ -22,7 +22,7 @@
 
 			<p>あなたのIDは${id}です</p>
 
-								<html:form method="POST" action="/change.do">
+								<html:form method="POST" action="/employee/change.do">
                      						 <html:submit property="method" value="登録">
                              					<bean:message key = "button.create"/>
                       						</html:submit>
@@ -46,7 +46,7 @@
 
 
 			<!-- 検索フォーム ↓-->
-				<html:form method="POST" action="/find.do" onsubmit="return findCheck()">
+				<html:form method="POST" action="/employee/find.do" onsubmit="return findCheck()">
 
 	  				<input type="radio" id="empId" name="findColumn" value="empId" checked="checked" >社員ID
 	  				<input type="text" id="findId" name="findId" value="">
@@ -89,7 +89,7 @@
 							<td>${emp.authorityName}</td>
 							<td>${emp.deptName}</td>
 							<td>
-								 <html:form method="POST" action="/change.do">
+								 <html:form method="POST" action="/employee/change.do">
 								 			<input type="hidden" name="findId" value="${emp.empId}">
                      						 <html:submit property="method">
                              					<bean:message key="button.update"/>
@@ -97,7 +97,7 @@
                					</html:form>
 							</td>
 							<td>
-								<html:form method="POST" action="/change.do">
+								<html:form method="POST" action="/employee/change.do">
 								 			<input type="hidden" name="findId" value="${emp.empId}">
                      						 <html:submit property="method">
                      						 	<bean:message key="button.delete"/>

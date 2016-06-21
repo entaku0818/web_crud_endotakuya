@@ -36,11 +36,11 @@
 
 
 			<!-- 登録フォーム ↓-->
-				<html:form method="POST" action="/create.do" onsubmit="return changeCheck()">
+				<html:form method="POST" action="/employee/admin/create.do" onsubmit="return changeCheck()">
 					<p>
 		    			パスワード
-		    			<html:text property="empPass" value=""/>
-
+		    			<html:text styleId="empPass"  property="empPass" value=""/>
+						<div id="chkEmpPassMsg"></div>
 	    			</p>
 
 					<p>
@@ -80,7 +80,7 @@
 
 				</html:form>
 
-				<html:form method="POST" action="/create.do" >
+				<html:form method="POST" action="/employee/change.do" >
 						<html:submit property="method" >
                             <bean:message key="button.top" />
                     	</html:submit>

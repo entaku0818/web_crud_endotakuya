@@ -31,7 +31,15 @@ public class DeleteAction extends LookupDispatchAction {
 
 
 
-
+    /**
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ActionForward finish(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {

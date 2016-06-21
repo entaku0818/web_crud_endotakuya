@@ -9,7 +9,7 @@
   <action-mappings>
     <!-- LoginActionの実装 -->
     <action path="/login" name="loginForm" type="jp.co.sss.crud.action.LoginAction" scope="request" validate="true" input="/index.jsp">
-      <forward name="success" path="/top.do"/>
+      <forward name="success" path="/employee/top.do"/>
       <forward name="error" path="/error.jsp"/>
     </action>
     <!-- LogoutActionの実装 -->
@@ -17,37 +17,40 @@
       <forward name="success" path="/index.jsp"/>
     </action>
     <!-- TopActionの実装 -->
-    <action path="/top" type="jp.co.sss.crud.action.TopAction">
+    <action path="/employee/top" type="jp.co.sss.crud.action.TopAction">
       <forward name="success" path="/employee/top.jsp"/>
     </action>
     <!-- FindActionの実装 -->
-    <action path="/find" name="topForm" type="jp.co.sss.crud.action.FindAction" scope="request" validate="true" input="/employee/top.jsp">
+    <action path="/employee/find" name="topForm" type="jp.co.sss.crud.action.FindAction" scope="request" validate="true" input="/employee/top.jsp">
       <forward name="success" path="/employee/top.jsp"/>
     </action>
     <!-- Sample07 LookupDispatchActionの実装 -->
-    <action path="/change" name="topForm" type="jp.co.sss.crud.action.ChangeAction" parameter="method">
-      <forward name="create" path="/employee/create.jsp"/>
+    <action path="/employee/change" name="topForm" type="jp.co.sss.crud.action.ChangeAction" parameter="method">
+      <forward name="create" path="/employee/admin/create.jsp"/>
       <forward name="update" path="/employee/update.jsp"/>
-	 <forward name="delete" path="/employee/chkDelete.jsp"/>
-	 <forward name="top" path="/top.do"/>
+      <forward name="delete" path="/employee/admin/chkDelete.jsp"/>
+      <forward name="top" path="/employee/top.do"/>
     </action>
     <!-- CreateActionの実装 -->
-    <action path="/create" name="changeForm" type="jp.co.sss.crud.action.CreateAction" parameter="method">
-      <forward name="check" path="/employee/chkCreate.jsp"/>
-      <forward name="finish" path="/employee/finCreate.jsp"/>
-
+    <action path="/employee/admin/create" name="changeForm" type="jp.co.sss.crud.action.CreateAction" parameter="method">
+      <forward name="check" path="/employee/admin/chkCreate.jsp"/>
+      <forward name="finish" path="/employee/admin/finCreate.jsp"/>
     </action>
     <!-- UpdateActionの実装 -->
-    <action path="/update" name="changeForm" type="jp.co.sss.crud.action.UpdateAction" parameter="method">
+    <action path="/employee/update" name="changeForm" type="jp.co.sss.crud.action.UpdateAction" parameter="method">
       <forward name="check" path="/employee/chkUpdate.jsp"/>
       <forward name="finish" path="/employee/finUpdate.jsp"/>
-      <forward name="top" path="/top.do"/>
     </action>
     <!-- deleteActionの実装 -->
-    <action path="/delete" name="topForm" type="jp.co.sss.crud.action.DeleteAction" parameter="method">
-      <forward name="check" path="/employee/chkDelete.jsp"/>
-      <forward name="finish" path="/employee/finDelete.jsp"/>
+    <action path="/employee/admin/delete" name="topForm" type="jp.co.sss.crud.action.DeleteAction" parameter="method">
+      <forward name="check" path="/employee/admin/chkDelete.jsp"/>
+      <forward name="finish" path="/employee/admin/finDelete.jsp"/>
     </action>
+
+
+
+
+
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="MessageResources"/>

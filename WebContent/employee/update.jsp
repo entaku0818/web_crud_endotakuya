@@ -36,7 +36,7 @@
 
 
 			<!-- 変更フォーム ↓-->
-				<html:form method="POST" action="/update.do" onsubmit="return changeCheck()">
+				<html:form method="POST" action="/employee/update.do" onsubmit="return changeCheck()">
 					<p>
 		    			<html:hidden property="empId" value="${userEmpDto.empId}"/>
 
@@ -69,7 +69,7 @@
 		    			<input type="text" name="birthday" value="${userEmpDto.birthday}">
 	    			</p>
 	    			<p>
-		    			権限
+		    			権限${userEmpDto.authority}
 		    				<input type="radio" id="authority" name="authority" value="1"
 			    				<c:if test="${userEmpDto.authority==1}" >checked</c:if>
 

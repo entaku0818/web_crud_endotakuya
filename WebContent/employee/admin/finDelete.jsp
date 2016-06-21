@@ -16,10 +16,19 @@
 
 <div id="contents">
 		<div id="header">
-			<h1>社員削除画面</h1>
+			<h1>社員一覧表示画面</h1>
 
 
 			<p>あなたのIDは${id}です</p>
+
+								<html:form method="POST" action="/employee/change.do">
+                     						 <html:submit property="method" value="登録">
+                             					<bean:message key = "button.create"/>
+                      						</html:submit>
+
+               					</html:form>
+
+
 
 			<html:link action="/logout">
                      ログアウト
@@ -35,35 +44,19 @@
 
 
 
-			<!-- 削除内容Check ↓-->
 
-				<html:form method="POST" action="/delete.do" onsubmit="return changeCheck()">
-
-									<p>社員名: ${userEmpDto.empName}</p>
-									<p>パスワード: ${userEmpDto.empPass}</p>
-									<p>性別: ${userEmpDto.genderName}<p>
-									<p>住所: ${userEmpDto.address}<p>
-									<p>生年月日:${userEmpDto.birthday}<p>
-									<p>権限: ${userEmpDto.authorityName}<p>
-									<p>部署名: ${userEmpDto.deptName}<p>
-
-					<html:submit property="method" value="OK">
-							<html:hidden property="userEmpDto" value="${userEmpDto}"/>
-                            <bean:message key="button.finish"/>
-                    </html:submit>
-
-
+				削除完了しました！！！！
+				<html:form method="POST" action="/employee/change.do" >
+						<html:submit property="method" >
+                            <bean:message key="button.top" />
+                    	</html:submit>
 				</html:form>
-
-			<!-- 削除内容Check ↑-->
-
 
 					</div>
 			</div>
 		<div id="footer">
 		</div>
 </div>
-
 
 </body>
 </html>

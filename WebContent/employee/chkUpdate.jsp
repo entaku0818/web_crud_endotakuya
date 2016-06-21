@@ -37,7 +37,7 @@
 
 			<!-- 登録内容Check ↓-->
 
-				<html:form method="POST" action="/update.do" onsubmit="return changeCheck()">
+				<html:form method="POST" action="/employee/update.do" onsubmit="return changeCheck()">
 
 									<p>社員名: ${userEmpDto.empName}</p>
 									<p>パスワード: ${userEmpDto.empPass}</p>

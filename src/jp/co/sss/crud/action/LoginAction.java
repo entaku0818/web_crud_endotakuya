@@ -31,11 +31,12 @@ public class LoginAction extends Action {
 
         if(ls.login(id,password)){
 
+        	int authority = ls.getAuthority(id);
+
         	//Httpセッションへログイン情報を格納する
             HttpSession session = request.getSession(true);
             session.setAttribute("id", id);
-            session.setAttribute("session", session.getId());
-
+            session.setAttribute("authority", authority );
 
         	return mapping.findForward("success");
         }

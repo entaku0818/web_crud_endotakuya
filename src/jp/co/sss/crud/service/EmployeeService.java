@@ -207,24 +207,6 @@ public class EmployeeService {
 
 	/**
 	 *
-	 * @param authority
-	 * @return
-	 */
-	private String getAuthorityName(int authority) {
-
-		if(authority == 1){
-			return "一般";
-		}else if(authority == 2){
-			return "管理";
-		}
-
-		return null;
-	}
-
-
-
-	/**
-	 *
 	 * @param empDto
 	 * @param empEntity
 	 * @return
@@ -287,7 +269,6 @@ public class EmployeeService {
 							sdf.parse(changeForm.getBirthday())
 							);
 				} catch (ParseException e) {
-					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
 
@@ -305,6 +286,7 @@ public class EmployeeService {
 	 * @return
 	 */
 	UserEmpDto setDtoFromForm(UserEmpDto empDto, ChangeForm changeForm){
+
 		DepartmentDAO deptDao = new DepartmentDAO();
 
 			empDto.setEmpId(changeForm.getEmpId());
@@ -334,6 +316,24 @@ public class EmployeeService {
 
 
 		return empDto;
+	}
+
+
+
+	/**
+	 *
+	 * @param authority
+	 * @return
+	 */
+	private String getAuthorityName(int authority) {
+
+		if(authority == 1){
+			return "一般";
+		}else if(authority == 2){
+			return "管理";
+		}
+
+		return null;
 	}
 
 

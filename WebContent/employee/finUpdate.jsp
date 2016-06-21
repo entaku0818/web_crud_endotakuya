@@ -21,7 +21,7 @@
 
 			<p>あなたのIDは${id}です</p>
 
-								<html:form method="POST" action="/change.do">
+								<html:form method="POST" action="/employee/change.do">
                      						 <html:submit property="method" value="登録">
                              					<bean:message key = "button.create"/>
                       						</html:submit>
@@ -46,7 +46,7 @@
 
 
 				更新完了しました！！！！
-				<html:form method="POST" action="/change.do" >
+				<html:form method="POST" action="/employee/change.do" >
 						<html:submit property="method" >
                             <bean:message key="button.top" />
                     	</html:submit>

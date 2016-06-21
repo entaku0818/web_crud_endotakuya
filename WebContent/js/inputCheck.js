@@ -11,26 +11,26 @@ function findCheck(){
 
 
 	// 取得する
-	//if (document.getElementById(findId).value < findIdMin || document.getElementById(findId).value > findIdMax){
-		errMsg = errMsg + '<font color="red">社員IDは' + findIdMin + '文字以上' + findIdMax + '文字以下で入力してください</font><br>' ;
-		flag = false;
-	//}
-
-
-
-
-		errMsg = errMsg + document.getElementById() ;
-
-
-
+	if (document.getElementById("empId").checked){
+		if (document.getElementById("findId").value < findIdMin || document.getElementById("findId").value > findIdMax){
+			errMsg = errMsg + '<font color="red">社員IDは半角数字' + findIdMin + '以上' + findIdMax + '文字で入力してください</font><br>' ;
+			flag = false;
+		}
+	}
 
 
 
 	// 検索する「社員名」の入力をチェック
 
 
-		errMsg = errMsg + '<font color="red">社員名は' + findNameMin + '文字以上' + findNameMax + '文字以下で入力してください</font><br>';
-		flag = false;
+
+		if (document.getElementById("empName").checked){
+
+			if (document.getElementById("findName").value.length < findNameMin || document.getElementById("findName").value.length > findNameMax){
+				errMsg = errMsg + '<font color="red">社員名は' + findNameMin + '文字以上' + findNameMax + '文字以下で入力してください</font><br>';
+				flag = false;
+			}
+		}
 
 
 
@@ -44,7 +44,10 @@ function findCheck(){
 
 
 
-
+/**
+ *
+ * @returns {Boolean}
+ */
 
 function loginCheck(){
 
@@ -74,6 +77,34 @@ function loginCheck(){
 
 
 		return flag;
+
+
+
+}
+
+
+/**
+ *
+ */
+function changeCheck(){
+	var empPassMin = 1;
+	var empPassMax = 15;
+
+	var flag = true;
+
+	target = document.getElementById("chkEmpPassMsg");
+	target.innerHTML =  '<font color="red">idは' + idMin + '文字以上' + idMax + '文字以下で入力してください</font>';
+
+	 // 「empPass」の文字数をチェック
+	if( document.getElementById("empPass").value.length < empPassMin || document.getElementById("empPass").length > empPassMax ){
+
+		target = document.getElementById("chkEmpPassMsg");
+		target.innerHTML =  '<font color="red">idは' + idMin + '文字以上' + idMax + '文字以下で入力してください</font>';
+		flag = false;
+	}
+
+	return false;
+
 
 
 
