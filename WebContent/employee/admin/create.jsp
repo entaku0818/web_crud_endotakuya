@@ -40,13 +40,15 @@
 					<p>
 		    			パスワード
 		    			<html:text styleId="empPass"  property="empPass" value=""/>
+		    		</p>
 						<div id="chkEmpPassMsg"></div>
-	    			</p>
+
 
 					<p>
 		    			社員名
-		    			<html:text property="empName" value=""/>
+		    			<html:text styleId="empName"  property="empName" value=""/>
 	    			</p>
+	    				<div id="chkEmpNameMsg"></div>
 					<p>
 		    			性別
 		    				<input type="radio" id="gender" name="gender" value="1" checked="checked">男
@@ -54,12 +56,14 @@
 	    			</p>
 					<p>
 		    			住所
-		    			<html:text property="address" value=""/>
+		    			<html:text styleId="address" property="address" value=""/>
 	    			</p>
+	    				<div id="chkAddressMsg"></div>
 	    			<p>
 		    			生年月日
-		    			<input type="text" name="birthday" value="">
+		    			<input type="text" Id="birthday"  name="birthday" value="">
 	    			</p>
+	    				<div id="chkBirthdayMsg"></div>
 	    			<p>
 		    			権限
 		    				<input type="radio" id="authority" name="authority" value="1" checked="checked">管理者

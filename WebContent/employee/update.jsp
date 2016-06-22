@@ -43,14 +43,17 @@
 	    			</p>
 					<p>
 		    			パスワード
-		    			<html:text property="empPass" value="${userEmpDto.empPass}"/>
-
+		    			<html:text styleId="empPass"  property="empPass" value="${userEmpDto.empPass}"/>
 	    			</p>
+						<div id="chkEmpPassMsg"></div>
+
 
 					<p>
 		    			社員名
-		    			<html:text property="empName" value=" ${userEmpDto.empName}"/>
+		    			<html:text styleId="empName"  property="empName" value=" ${userEmpDto.empName}"/>
 	    			</p>
+	    				<div id="chkEmpNameMsg"></div>
+
 					<p>
 		    			性別
 		    				<input type="radio" id="gender" name="gender" value="1"
@@ -62,11 +65,13 @@
 	    			</p>
 					<p>
 		    			住所
-		    			<html:text property="address" value="${userEmpDto.address}"/>
+		    			<html:text styleId="address"  property="address" value="${userEmpDto.address}"/>
 	    			</p>
+	    				<div id="chkAddressMsg"></div>
 	    			<p>
 		    			生年月日
-		    			<input type="text" name="birthday" value="${userEmpDto.birthday}">
+		    			<input type="text" Id="birthday"  name="birthday" value="${userEmpDto.birthday}">
+		    			<div id="chkBirthdayMsg"></div>
 	    			</p>
 	    			<p>
 		    			権限${userEmpDto.authority}

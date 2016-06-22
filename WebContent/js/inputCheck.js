@@ -1,3 +1,8 @@
+
+/**
+ * 検索フォームの文字列チェック
+ * @returns {Boolean}
+ */
 function findCheck(){
 
 	var findIdMin = 1;
@@ -14,6 +19,7 @@ function findCheck(){
 	if (document.getElementById("empId").checked){
 		if (document.getElementById("findId").value < findIdMin || document.getElementById("findId").value > findIdMax){
 			errMsg = errMsg + '<font color="red">社員IDは半角数字' + findIdMin + '以上' + findIdMax + '文字で入力してください</font><br>' ;
+
 			flag = false;
 		}
 	}
@@ -21,9 +27,6 @@ function findCheck(){
 
 
 	// 検索する「社員名」の入力をチェック
-
-
-
 		if (document.getElementById("empName").checked){
 
 			if (document.getElementById("findName").value.length < findNameMin || document.getElementById("findName").value.length > findNameMax){
@@ -90,20 +93,52 @@ function changeCheck(){
 	var empPassMin = 1;
 	var empPassMax = 15;
 
+	var empNameMin = 1;
+	var empNameMax = 30;
+
+	var addressMin = 1;
+	var addressMax = 30;
+
+
 	var flag = true;
 
-	target = document.getElementById("chkEmpPassMsg");
-	target.innerHTML =  '<font color="red">idは' + idMin + '文字以上' + idMax + '文字以下で入力してください</font>';
+
 
 	 // 「empPass」の文字数をチェック
-	if( document.getElementById("empPass").value.length < empPassMin || document.getElementById("empPass").length > empPassMax ){
+	if( document.getElementById("empPass").value.length < empPassMin || document.getElementById("empPass").value.length > empPassMax ){
 
 		target = document.getElementById("chkEmpPassMsg");
-		target.innerHTML =  '<font color="red">idは' + idMin + '文字以上' + idMax + '文字以下で入力してください</font>';
+		target.innerHTML =  '<font color="red">パスワードは' + empPassMin + '文字以上' + empPassMax + '文字以下で入力してください</font>';
 		flag = false;
 	}
 
-	return false;
+	 // 「empName」の文字数をチェック
+	if( document.getElementById("empName").value.length < empNameMin || document.getElementById("empName").value.length > empNameMax ){
+
+		target = document.getElementById("chkEmpNameMsg");
+		target.innerHTML =  '<font color="red">社員名は' + empNameMin + '文字以上' + empNameMax + '文字以下で入力してください</font>';
+		flag = false;
+	}
+
+	// 「address」の文字数をチェック
+
+	 if( document.getElementById("address").value.length < addressMin || document.getElementById("address").value.length > addressMax ){
+
+		target = document.getElementById("chkAddressMsg");
+		target.innerHTML =  '<font color="red">住所は' + addressMin + '文字以上' + addressMax + '文字以下で入力してください</font>';
+		flag = false;
+	}
+
+
+	  if( !document.getElementById("birthday").value.match(/^\d{4}\/\d{2}\/\d{2}$/)){
+			target = document.getElementById("chkBirthdayMsg");
+			target.innerHTML =  '<font color="red">日付は「yyyy/MM/dd」形式で入力してください</font>';
+			flag = false;
+	 }
+
+
+
+	return flag;
 
 
 
