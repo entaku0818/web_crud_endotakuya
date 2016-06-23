@@ -60,13 +60,14 @@ div#footer{
 /*全体のレイアウトの指定 ↑ここまで*/
 
 
+/*LoginFormのCSS設定 ↓ここから*/
 input[type="text"],
 input[type="password"] {
     width: 300px;
     padding: 4px;
     font-size: 14px;
     }
-
+/*LoginFormのCSS設定 ↑ここから*/
 
 /*メニューバーの設定 ↓ここから*/
 div#menu{

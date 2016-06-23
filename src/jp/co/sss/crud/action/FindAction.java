@@ -15,7 +15,11 @@ import org.apache.struts.action.ActionMapping;
 
 
 
-
+/**
+ *
+ * @author Edu
+ *
+ */
 public final class FindAction extends Action {
 
 
@@ -27,23 +31,20 @@ public final class FindAction extends Action {
         HttpServletRequest request,
         HttpServletResponse response) {
 
-		TopForm tf = (TopForm) form;
+		TopForm topForm = (TopForm) form;
 
 		EmployeeService empService = new EmployeeService();
     	DepartmentService deptService = new DepartmentService();
     	//
-		UserEmpDto findEmp = new UserEmpDto();
 
-		String findColumn = tf.getFindColumn();
+		String findColumn = topForm.getFindColumn();
 
 
-		findEmp.setEmpId(tf.getFindId());
-		findEmp.setEmpName(tf.getFindName());
-		findEmp.setDeptId(tf.getFindDeptId());
+
 
 
 		//ユーザー情報を全件取得
-		UserEmpDto[] userEmpDto = empService.getAllEmpData(findColumn, findEmp);
+		UserEmpDto[] userEmpDto = empService.getAllEmpData(findColumn, topForm);
 
     	// 部署情報の動的なselectボタンのデータの生成
     	UserEmpDto[] selectDeptDto = deptService.getUserEmpDto();
@@ -56,14 +57,13 @@ public final class FindAction extends Action {
     		request.setAttribute("getTopDataFlag", getTopDataFlag);
     	}
 
-    	if (userEmpDto.length > 0 || selectDeptDto.length > 0){
+
     		//Httpセッションへ社員情報を格納する
             request.setAttribute("userEmpDto", userEmpDto);
 
             //Httpセッションへ部署情報を格納する
             request.setAttribute("selectDeptDto", selectDeptDto);
             return (mapping.findForward("success"));
-    	}
-    	return (mapping.findForward("error"));
+
     }
 }

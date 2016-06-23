@@ -10,12 +10,9 @@ import jp.co.sss.crud.dao.EmployeeDAO;
 import jp.co.sss.crud.dto.UserEmpDto;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.ChangeForm;
+import jp.co.sss.crud.form.TopForm;
 
 public class EmployeeService {
-
-
-
-
 
 
 
@@ -43,12 +40,12 @@ public class EmployeeService {
 
 
 	/**
-	 *Topページに出力するEmployeeを取得するメソッド
+	 *Topページに出力するEmployeeの検索結果を取得するメソッド
 	 * @param findColumn
-	 * @param findEmp
+	 * @param topForm
 	 * @return
 	 */
-	public UserEmpDto[] getAllEmpData(String findColumn, UserEmpDto findEmp) {
+	public UserEmpDto[] getAllEmpData(String findColumn, TopForm topForm) {
 
 				//empDataは更新削除が発生する場合があるため、List
 
@@ -57,11 +54,11 @@ public class EmployeeService {
 
 				//findColumn の値によって呼び出すDAOのメソッドを変更する
 				if(findColumn.equals("empId")){
-					empEntity = empDao.findAllById(findEmp.getEmpId());
+					empEntity = empDao.findAllById(topForm.getFindId());
 				}else if(findColumn.equals("empName")){
-					empEntity = empDao.findAllByName(findEmp.getEmpName());
+					empEntity = empDao.findAllByName(topForm.getFindName());
 				}else if(findColumn.equals("deptName")){
-					empEntity = empDao.findAllByDeptId(findEmp.getDeptId());
+					empEntity = empDao.findAllByDeptId(topForm.getFindDeptId());
 				}
 
 				UserEmpDto[] empDto = new UserEmpDto[empEntity.size()];
@@ -101,7 +98,7 @@ public class EmployeeService {
 	 * ユーザーがフォームへ入力したデータを確認するメソッド
 	 * @param changeForm
 	 * @param empId
-	 * @return
+	 * @return　empDto
 	 */
 	public UserEmpDto chkInputData(ChangeForm changeForm) {
 
@@ -119,7 +116,7 @@ public class EmployeeService {
 	 * changeFormで受け取ったデータを挿入するメソッド
 	 * @param empId
 	 * @param ChangeForm
-	 * @return
+	 * @return 挿入件数
 	 */
 	public int createData(ChangeForm changeForm ) {
 		EmployeeDAO empDao = new EmployeeDAO();
@@ -133,7 +130,7 @@ public class EmployeeService {
 	 * changeFormで受け取ったデータを更新するメソッド
 	 * @param empId
 	 * @param ChangeForm
-	 * @return
+	 * @return 更新件数
 	 */
 	public int updateData(ChangeForm changeForm) {
 		EmployeeDAO empDao = new EmployeeDAO();
@@ -147,23 +144,21 @@ public class EmployeeService {
 	 * TopFormで受け取ったデータを更新するメソッド
 	 * @param empId
 	 * @param ChangeForm
-	 * @return
+	 * @return　削除件数
 	 */
 	public int deleteData(int empId) {
-		// TODO 自動生成されたメソッド・スタブ
 		EmployeeDAO empDao = new EmployeeDAO();
 
 		//entityをDaoへ渡す
 		int count = empDao.deleteById(empId);
 
 		return count;
-
 	}
 
 
 
 	/**
-	 *	Entityへ格納されているデータを
+	 *	Entityへ格納されているデータをDtoへ格納する
 	 * @param empDto
 	 * @param empEntity
 	 * @return

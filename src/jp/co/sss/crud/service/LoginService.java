@@ -12,7 +12,7 @@ public class LoginService {
 	 * ログインをするメソッド
 	 * @param id
 	 * @param password
-	 * @return
+	 * @return boolean
 	 */
 	public boolean login(int id, String password)  {
 
@@ -24,7 +24,7 @@ public class LoginService {
 		loginData = loginDao.findById(id);
 
 		//取得したデータのpasswordと引数で与えられたpasswordがマッチしているか確認する
-		if( loginData.getEmpPass().equals(password) ){
+		if( loginData.getEmpPass() != null && loginData.getEmpPass().equals(password) ){
 			return true;
 		}
 
@@ -34,7 +34,7 @@ public class LoginService {
 	/**
 	 * ログインしたときの権限を取得するメソッド
 	 * @param id
-	 * @return
+	 * @return int authority
 	 */
 	public int getAuthority(int id) {
 		Employee loginData = new Employee();
@@ -44,8 +44,6 @@ public class LoginService {
 		loginData = loginDao.findById(id);
 
 		//取得したデータのpasswordと引数で与えられたpasswordがマッチしているか確認する
-
-
 		return loginData.getAuthority();
 	}
 

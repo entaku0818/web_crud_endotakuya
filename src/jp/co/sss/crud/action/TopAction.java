@@ -14,12 +14,12 @@ import org.apache.struts.action.ActionMapping;
 
 
 
-
+/**
+ *
+ * @author Edu
+ *
+ */
 public final class TopAction extends Action {
-
-
-
-
 
 	public ActionForward execute(
         ActionMapping mapping,
@@ -37,16 +37,12 @@ public final class TopAction extends Action {
     	UserEmpDto[] selectDeptDto = deptService.getUserEmpDto();
 
 
+    	//Httpセッションへ社員情報を格納する
+        request.setAttribute("userEmpDto", userEmpDto);
 
-    	if (userEmpDto.length > 0 || selectDeptDto.length > 0){
-    		//Httpセッションへ社員情報を格納する
-            request.setAttribute("userEmpDto", userEmpDto);
+        //Httpセッションへ部署情報を格納する
+        request.setAttribute("selectDeptDto", selectDeptDto);
 
-            //Httpセッションへ部署情報を格納する
-            request.setAttribute("selectDeptDto", selectDeptDto);
-            return (mapping.findForward("success"));
-
-    	}
-        return (mapping.findForward("error"));
+    	return mapping.findForward("success");
     }
 }

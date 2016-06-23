@@ -58,12 +58,12 @@
   </servlet-mapping>
 
 
-  <!--
+
   <taglib>
     <taglib-uri>/tags/struts-bean</taglib-uri>
     <taglib-location>/WEB-INF/struts-bean.tld</taglib-location>
   </taglib>
-	-->
+
   <taglib>
     <taglib-uri>/tags/struts-html</taglib-uri>
     <taglib-location>/WEB-INF/struts-html.tld</taglib-location>

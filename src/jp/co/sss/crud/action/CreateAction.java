@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import jp.co.sss.crud.dto.UserEmpDto;
 import jp.co.sss.crud.form.ChangeForm;
@@ -63,7 +62,11 @@ public class CreateAction extends LookupDispatchAction {
     	EmployeeService empService = new EmployeeService();
 
     	int count = empService.createData(changeForm);
+    	// 作成確認
+    	if (count > 0){
+            return mapping.findForward("finish");
 
-        return mapping.findForward("finish");
+    	}
+    	return mapping.findForward("error");
     }
 }

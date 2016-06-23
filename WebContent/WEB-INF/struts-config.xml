@@ -13,7 +13,7 @@
       <forward name="error" path="/error.jsp"/>
     </action>
     <!-- LogoutActionの実装 -->
-    <action path="/logout" type="jp.co.sss.crud.action.LogoutAction">
+    <action path="/logout" name="logoutForm" type="jp.co.sss.crud.action.LogoutAction">
       <forward name="success" path="/index.jsp"/>
     </action>
     <!-- TopActionの実装 -->

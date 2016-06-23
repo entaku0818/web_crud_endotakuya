@@ -62,6 +62,7 @@ public class UpdateAction extends LookupDispatchAction {
     	EmployeeService empService = new EmployeeService();
 
     	int count = empService.updateData(changeForm);
+    	//更新処理成功
     	if (count > 0){
     		return mapping.findForward("finish");
         }
