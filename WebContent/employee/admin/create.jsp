@@ -20,14 +20,24 @@
 
 			<p>あなたのIDは${id}です</p>
 
-			<html:link action="/logout">
-                     ログアウト
-            </html:link>
+								<!-- 登録ボタン-->
+								<html:form styleClass="create" method="POST" action="/employee/change.do">
+                     						 <html:submit property="method" value="登録">
+                             					<bean:message key = "button.create"/>
+                      						</html:submit>
+               					</html:form>
+               					<!-- 登録ボタン-->
+
+
+								<!-- ログアウトボタン-->
+               					<html:form styleClass="logout" method="POST" action="/logout.do" >
+							    	<html:submit>ログアウト</html:submit>
+							  	</html:form>
+							  	<!-- ログアウトボタン-->
 
 
 
-			<div id="menu">
-			</div>
+
 		</div>
 			<div id="container">
 					<div id="main">
@@ -36,40 +46,42 @@
 
 			<!-- 登録フォーム ↓-->
 				<html:form method="POST" action="/employee/admin/create.do" onsubmit="return changeCheck()">
-					<p>
-		    			パスワード
+					<div class="form-group">
+		    			<span class="column">パスワード</span>
 		    			<html:text styleId="empPass"  property="empPass" value=""/>
-		    		</p>
+
 						<div id="chkEmpPassMsg"></div>
+					</div>
 
-
-					<p>
-		    			社員名
+					<div class="form-group">
+		    			<label class="column">社員名</label>
 		    			<html:text styleId="empName"  property="empName" value=""/>
-	    			</p>
+
 	    				<div id="chkEmpNameMsg"></div>
-					<p>
-		    			性別
+	    			</div>
+					<div class="form-group">
+		    			<label class="column">性別</label>
 		    				<input type="radio" id="gender" name="gender" value="1" checked="checked">男
 			    			<input type="radio" id="gender" name="gender" value="2" >女
-	    			</p>
-					<p>
-		    			住所
+	    			</div>
+					<div class="form-group">
+		    			<label class="column">住所</label>
 		    			<html:text styleId="address" property="address" value=""/>
-	    			</p>
+
 	    				<div id="chkAddressMsg"></div>
+	    			</div>
 	    			<p>
-		    			生年月日
+		    			<label class="column">生年月日</label>
 		    			<input type="date" Id="birthday"  name="birthday" value="">
 	    			</p>
 	    				<div id="chkBirthdayMsg"></div>
 	    			<p>
-		    			権限
+		    			<label class="column">権限</label>
 		    				<input type="radio" id="authority" name="authority" value="1" checked="checked">管理者
 			    			<input type="radio" id="authority" name="authority" value="2" >一般
 	    			</p>
 	    			<p>
-		    			部署ID
+		    			<label class="column">部署ID</label>
 		    				<html:select property="deptId" >
 	    						<html:options collection="selectDeptDto" property="deptId" labelProperty="deptName"/>
 							</html:select>

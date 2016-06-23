@@ -30,7 +30,6 @@ public class EmployeeDAO {
         	emp.setEmpName(rs.getString("emp_name"));
         	emp.setGender(rs.getInt("gender"));
         	emp.setAddress(rs.getString("address"));
-        					//getDateが何型？？
         	emp.setBirthday(rs.getDate("birthday"));
         	emp.setAuthority(rs.getInt("authority"));
         	emp.setDeptId(rs.getInt("dept_id"));
@@ -189,19 +188,7 @@ public class EmployeeDAO {
 
 
 
-	//動作確認用
-	public static void main(String[] args) throws Exception{
-		EmployeeDAO dao = new EmployeeDAO();
-	    List<Employee> list = dao.findAll();
-	    for(int i=0; i<list.size(); i++){
-	    	Employee emp = list.get(i);
-	        System.out.println(emp.getEmpId());
-	    }
-	}
-
-
 	public int deleteById(int empId) {
-		// TODO 自動生成されたメソッド・スタブ
 		String sql = "DELETE FROM employee WHERE emp_id = ?";
 
 		DBAccess access = new DBAccess();

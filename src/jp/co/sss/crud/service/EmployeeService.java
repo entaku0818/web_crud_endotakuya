@@ -179,11 +179,8 @@ public class EmployeeService {
 			empDto[i].setEmpId(empEntity.get(i).getEmpId());
 			empDto[i].setEmpName(empEntity.get(i).getEmpName());
 
-			if(empEntity.get(i).getGender()==1){
-				empDto[i].setGenderName("男");
-			}else if(empEntity.get(i).getGender()==2){
-				empDto[i].setGenderName("女");
-			}
+			empDto[i].setGenderName( this.getGenderName( empEntity.get(i).getGender() ) );
+
 
 			empDto[i].setAddress(empEntity.get(i).getAddress());
 			empDto[i].setBirthday( sdf.format(empEntity.get(i).getBirthday()) );
@@ -218,11 +215,7 @@ public class EmployeeService {
 			empDto.setEmpPass(empEntity.getEmpPass());
 			empDto.setEmpName(empEntity.getEmpName());
 			empDto.setGender(empEntity.getGender());
-			if(empEntity.getGender()==1){
-				empDto.setGenderName("男");
-			}else if(empEntity.getGender()==2){
-				empDto.setGenderName("女");
-			}
+			empDto.setGenderName( this.getGenderName(empEntity.getGender() ) );
 
 			empDto.setAddress(empEntity.getAddress());
 			empDto.setBirthday( sdf.format(empEntity.getBirthday()) );
@@ -288,22 +281,11 @@ public class EmployeeService {
 			empDto.setEmpPass(changeForm.getEmpPass());
 			empDto.setEmpName(changeForm.getEmpName());
 			empDto.setGender(changeForm.getGender());
-
-			if(changeForm.getGender()==1){
-				empDto.setGenderName("男");
-			}else if(changeForm.getGender()==2){
-				empDto.setGenderName("女");
-			}
-
-
+			empDto.setGenderName( this.getGenderName(changeForm.getGender() ) );
 			empDto.setAddress(changeForm.getAddress());
-
 			empDto.setBirthday(changeForm.getBirthday());
-
 			empDto.setAuthority(changeForm.getAuthority());
 			empDto.setAuthorityName( this.getAuthorityName(changeForm.getAuthority()) );
-
-
 			empDto.setEmpName(changeForm.getEmpName());
 			empDto.setDeptId( changeForm.getDeptId() );
 			// DepartmentDAO経由でDepartmentテーブルから部署名を取得する
@@ -326,6 +308,17 @@ public class EmployeeService {
 			return "一般";
 		}else if(authority == 2){
 			return "管理";
+		}
+
+		return null;
+	}
+
+	private String getGenderName(int gender) {
+
+		if(gender == 1){
+			return "男";
+		}else if(gender == 2){
+			return "女";
 		}
 
 		return null;

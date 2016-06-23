@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+
 public class EncodingFilter implements Filter {
 
     public void init(FilterConfig filterConfig)
@@ -21,7 +22,7 @@ public class EncodingFilter implements Filter {
             ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        //System.out.println("calls EncodingFilter#doFitler()");
+
 
         request.setCharacterEncoding("UTF-8");
         chain.doFilter(request, response);

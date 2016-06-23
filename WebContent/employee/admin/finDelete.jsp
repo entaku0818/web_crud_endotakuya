@@ -29,11 +29,20 @@
                					</html:form>
 
 
+								<!-- 登録ボタン-->
+								<html:form styleClass="create" method="POST" action="/employee/change.do">
+                     						 <html:submit property="method" value="登録">
+                             					<bean:message key = "button.create"/>
+                      						</html:submit>
+               					</html:form>
+               					<!-- 登録ボタン-->
 
-			<html:link action="/logout">
-                     ログアウト
-            </html:link>
 
+								<!-- ログアウトボタン-->
+               					<html:form styleClass="logout" method="POST" action="/logout.do" >
+							    	<html:submit>ログアウト</html:submit>
+							  	</html:form>
+							  	<!-- ログアウトボタン-->
 
 
 			<div id="menu">

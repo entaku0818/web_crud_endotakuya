@@ -31,6 +31,10 @@ public class DBAccess {
 		    try{
 
 				conn = manager.getConn();
+
+				 if (conn == null){
+
+				 }
 	            ps = conn.prepareStatement(sql);
 				rs = ps.executeQuery();
 
@@ -77,17 +81,23 @@ public class DBAccess {
 		    try{
 
 				conn = manager.getConn();
-	            ps = conn.prepareStatement(sql);
-	            ps.setInt(1, whereValue);
+				if( conn != null){
+		            ps = conn.prepareStatement(sql);
+		            ps.setInt(1, whereValue);
 
-				rs = ps.executeQuery();
+					rs = ps.executeQuery();
 
-				while(rs.next()) {
+					while(rs.next()) {
 
-				    T bean = mapping.createFromResultSet(rs);
+					    T bean = mapping.createFromResultSet(rs);
 
-				    list.add(bean);
+					    list.add(bean);
+					}
+				}else if(conn == null){
+
 				}
+
+
 
 
 

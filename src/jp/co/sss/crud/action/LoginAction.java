@@ -31,6 +31,7 @@ public class LoginAction extends Action {
 
         if(ls.login(id,password)){
 
+        	//権限情報をセッションへ格納する
         	int authority = ls.getAuthority(id);
 
         	//Httpセッションへログイン情報を格納する

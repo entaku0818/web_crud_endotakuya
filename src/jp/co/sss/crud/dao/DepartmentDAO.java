@@ -67,16 +67,7 @@ public class DepartmentDAO {
 
 
 
-	//動作確認用main
-	public static void main(String[] args) throws Exception{
-		DepartmentDAO dao = new DepartmentDAO();
-	    List<Department> list = dao.findAll();
-	    for(int i=0; i<list.size(); i++){
-	    	Department dept = list.get(i);
-	        System.out.println(dept.getDeptId());
-	        System.out.println(dept.getDeptName());
-	    }
-	}
+
 
 
 

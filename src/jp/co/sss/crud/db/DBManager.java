@@ -23,20 +23,18 @@ public class DBManager {
 
 
 
-    /**
-     * DBと接続する
-     *
-     * @return DBコネクション
-     * @throws ClassNotFoundException
-     * @throws SQLException
-     */
+
+
+	/**
+	 *DBと接続する
+	 * @return conn
+	 */
     public Connection getConn()  {
 
         // JDBCドライバクラスをJVMに登録
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
         } catch (ClassNotFoundException e) {
-            // TODO 自動生成された catch ブロック
             e.printStackTrace();
         }
         // DBへ接続
@@ -46,7 +44,9 @@ public class DBManager {
                     "jdbc:oracle:thin:@localhost:1521:XE",
                     "web_crud_user", "systemsss");
         } catch (SQLException e) {
+        	//DataBaseへ接続できない場合
             e.printStackTrace();
+            e.getMessage();
         }
         return conn;
     }
@@ -56,18 +56,12 @@ public class DBManager {
      *
      * @param conn
      * DBコネクション
+     * @throws SQLException
      */
-    public void close(Connection conn) {
+    public void close(Connection conn) throws SQLException {
 
-        try {
-
-            // 切断処理
-            if (conn != null) {
                 conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
     }
 
 

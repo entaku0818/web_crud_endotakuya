@@ -17,30 +17,39 @@
 <div id="contents">
 		<div id="header">
 			<h1>社員一覧表示画面</h1>
-
+			<img src="<html:rewrite page="/img/employee.jpg"">
 
 			<p>あなたのIDは${id}です</p>
 
-								<html:form method="POST" action="/employee/change.do">
+								<!-- 登録ボタン-->
+								<html:form styleClass="create" method="POST" action="/employee/change.do">
                      						 <html:submit property="method" value="登録">
                              					<bean:message key = "button.create"/>
                       						</html:submit>
-
                					</html:form>
+               					<!-- 登録ボタン-->
+
+
+								<!-- ログアウトボタン-->
+               					<html:form styleClass="logout" method="POST" action="/logout.do" >
+							    	<html:submit>ログアウト</html:submit>
+							  	</html:form>
+							  	<!-- ログアウトボタン-->
 
 
 
 
-			<div id="menu">
-			</div>
+
 		</div>
 			<div id="container">
 					<div id="main">
 
-
+			<!-- エラーメッセージの表示-->
+				${errorMessage}
+			<!-- エラーメッセージの表示-->
 
 			<!-- 検索フォーム ↓-->
-				<html:form method="POST" action="/employee/find.do" onsubmit="return findCheck()">
+				<html:form styleClass="find" method="POST" action="/employee/find.do" onsubmit="return findCheck()">
 
 	  				<input type="radio" id="empId" name="findColumn" value="empId" checked="checked" >社員ID
 	  				<input type="text" id="findId" name="findId" value="">
@@ -72,6 +81,7 @@
 							<th>生年月日</th>
 							<th>権限</th>
 							<th>部署名</th>
+							<th colspan="2">操作</th>
 							</tr>
 					<c:forEach var="emp" items="${userEmpDto}">
 							<tr>
@@ -110,7 +120,14 @@
 				</c:if>
 			<!-- 検索結果 ↑-->
 
-			<input type="button" value="TOPへ戻る" onclick="location.href='./employee/top.do'">
+
+
+
+				<html:form styleClass="top" method="POST" action="/employee/change.do" >
+						<html:submit property="method" >
+                            <bean:message key="button.top" />
+                    	</html:submit>
+				</html:form>
 
 
 					</div>
