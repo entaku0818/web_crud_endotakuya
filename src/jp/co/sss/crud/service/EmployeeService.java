@@ -7,6 +7,7 @@ import java.util.List;
 
 import jp.co.sss.crud.dao.DepartmentDAO;
 import jp.co.sss.crud.dao.EmployeeDAO;
+import jp.co.sss.crud.dto.PageDto;
 import jp.co.sss.crud.dto.UserEmpDto;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.ChangeForm;
@@ -19,19 +20,29 @@ public class EmployeeService {
 
 	/**
 	 * Topページに出力するEmployeeを取得するメソッド
+	 * @param selectPage
 	 * @return
 	 */
-	public UserEmpDto[] getAllEmpData()  {
+	public UserEmpDto[] getAllEmpData(int selectPage, int PAGE_COUNT)  {
 
 		//empDataは更新削除が発生する場合があるため、List
 		List<Employee> empEntity = new ArrayList<Employee>();
 		EmployeeDAO empDao = new EmployeeDAO();
 
+		int startCount = 0;
+		int endCount = 0;
+
+		startCount = selectPage * PAGE_COUNT + 1;
+		if((selectPage + 1 ) * PAGE_COUNT > this.getCountAll()){
+			endCount = this.getCountAll();
+		}else{
+			endCount = (selectPage + 1 ) * PAGE_COUNT;
+		}
+		UserEmpDto[] empDto = new UserEmpDto[ endCount - startCount + 1 ];
 
 		//empDataへDaoから取得したデータを格納する
-		empEntity = empDao.findAll();
+		empEntity = empDao.findAll(startCount ,endCount);
 
-		UserEmpDto[] empDto = new UserEmpDto[empEntity.size()];
 
 		return this.setDtoFromEntity(empDto, empEntity);
 
@@ -86,10 +97,22 @@ public class EmployeeService {
 		UserEmpDto empDto = new UserEmpDto();
 
 		return setDtoFromEntity(empDto, empEntity);
-}
+	}
 
+	/**
+	 * Employeeテーブルの件数を取得する
+	 * @param selectPage
+	 * @param PAGE_COUNT
+	 * @return
+	 */
+	public int getCountAll()  {
 
+		//empDataは更新削除が発生する場合があるため、List
+		EmployeeDAO empDao = new EmployeeDAO();
 
+		return empDao.findAll().size();
+
+	}
 
 
 

@@ -114,11 +114,28 @@
 							</table>
 
 				</c:if>
+					<!-- ページング処理 ↓-->
+
+					<c:if test="${pageDto.hasPrev}" >
+						<html:link action="/employee/top.do?pageNo=${pageDto.pageNo - 1}" >＜Prev</html:link>
+					</c:if>
+
+
+					<c:if test="${pageDto.hasNext}" >
+						<html:link action="/employee/top.do?pageNo=${pageDto.pageNo + 1}" >Next＞</html:link>
+					</c:if>
+					<!-- ページング処理 ↑-->
+
+
+
 				<c:if test="${getTopDataFlag}" >
 					<p>該当する社員は存在しませんでした</p>
 
 				</c:if>
+
 			<!-- 検索結果 ↑-->
+
+
 
 
 

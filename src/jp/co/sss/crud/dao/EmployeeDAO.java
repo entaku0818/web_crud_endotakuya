@@ -47,10 +47,31 @@ public class EmployeeDAO {
     }
 
 
+
     /**
-     * 全件検索を行います。
-     * 戻り値はEmployeeオブジェクトのListです。
+     *
+     * @param stertCount　取得開始位置
+     * @param endCount 取得終了位置
+     * @return
      */
+	public List<Employee> findAll(int stertCount, int endCount ) {
+
+		String sql = "SELECT * FROM (SELECT a.*, ROW_NUMBER() OVER (ORDER BY emp_id) AS num FROM EMPLOYEE a) b WHERE b.num  BETWEEN  ?  AND  ? ORDER BY b.num";
+
+		DBAccess access = new DBAccess();
+		List<Employee> empData = new ArrayList<Employee>();
+
+
+			empData = access.select(sql, allMapping, stertCount, endCount);
+
+		return empData;
+	}
+
+    /**
+    *
+    *
+    * @return
+    */
 	public List<Employee> findAll() {
 
 		String sql = "select * from employee";
@@ -71,7 +92,7 @@ public class EmployeeDAO {
 	 * @return empData EmployeeテーブルのEntityList
 	 */
 	public List<Employee> findAllById(int empId) {
-		String sql = "select * from employee where emp_id = ?";
+		String sql = "select * from employee where emp_id = ? ORDER BY emp_id ASC";
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();
@@ -92,7 +113,7 @@ public class EmployeeDAO {
 
 
 
-		String sql = "select * from employee where emp_name like ?";
+		String sql = "select * from employee where emp_name like ? ORDER BY emp_id ASC";
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();
@@ -114,7 +135,7 @@ public class EmployeeDAO {
 	 * @return
 	 */
 	public List<Employee> findAllByDeptId(int deptId) {
-		String sql = "select * from employee where dept_id = ?";
+		String sql = "select * from employee where dept_id = ? ORDER BY emp_id ASC";
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();
@@ -200,6 +221,9 @@ public class EmployeeDAO {
 
 		return empCount;
 	}
+
+
+
 
 
 

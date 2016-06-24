@@ -19,7 +19,7 @@
       <forward name="success" path="/index.jsp"/>
     </action>
     <!-- TopActionの実装 -->
-    <action path="/employee/top" type="jp.co.sss.crud.action.TopAction">
+    <action path="/employee/top" name="topForm" type="jp.co.sss.crud.action.TopAction" validate="false">
       <forward name="success" path="/employee/top.jsp"/>
     </action>
     <!-- FindActionの実装 -->
@@ -42,11 +42,12 @@
     <action path="/employee/update" name="changeForm" type="jp.co.sss.crud.action.UpdateAction" parameter="method">
       <forward name="check" path="/employee/chkUpdate.jsp"/>
       <forward name="finish" path="/employee/finUpdate.jsp"/>
+      <forward name="error" path="/employee/top.do"/>
     </action>
     <!-- deleteActionの実装 -->
     <action path="/employee/admin/delete" name="topForm" type="jp.co.sss.crud.action.DeleteAction" parameter="method">
       <forward name="finish" path="/employee/admin/finDelete.jsp"/>
-      <forward name="top" path="/employee/top.do"/>
+      <forward name="error" path="/employee/top.do"/>
     </action>
 
 

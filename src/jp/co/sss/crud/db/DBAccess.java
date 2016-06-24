@@ -158,6 +158,53 @@ public class DBAccess {
 
 
 
+
+		/**
+		 *
+		 * @param sql
+		 * @param mapping
+		 * @param pageNo ページ番号
+		 * @param countOfPage 1ページあたりの件数
+		 * @return
+		 */
+		public <T> List<T> select(String sql, ResultSetBeanMapping<T> mapping, int selectPage,
+				int countOfPage) {
+
+				List<T> list = new ArrayList<T>();
+		    	Connection conn = null;
+		    	PreparedStatement ps = null;
+		    	ResultSet rs = null;
+		    	DBManager manager = new DBManager();
+
+			    try{
+
+					conn = manager.getConn();
+		            ps = conn.prepareStatement(sql);
+		            ps.setInt(1, selectPage);
+		            ps.setInt(2, countOfPage);
+
+					rs = ps.executeQuery();
+
+					while(rs.next()) {
+
+					    T bean = mapping.createFromResultSet(rs);
+
+					    list.add(bean);
+					}
+
+
+
+			    } catch (SQLException e) {
+					e.printStackTrace();
+				}finally{
+
+		            if (conn != null) {
+		                try {conn.close();} catch (SQLException igonre) {}
+		            }
+			    }
+				return list;
+			}
+
 		/**
 		 *
 		 * @param sql
@@ -296,6 +343,8 @@ public class DBAccess {
 
 			return sqlCount;
 		}
+
+
 
 
 }

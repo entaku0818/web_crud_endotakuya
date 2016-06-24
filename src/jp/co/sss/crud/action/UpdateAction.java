@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.sss.crud.dto.SysDataDto;
 import jp.co.sss.crud.dto.UserEmpDto;
 import jp.co.sss.crud.form.ChangeForm;
 import jp.co.sss.crud.service.EmployeeService;
@@ -65,8 +66,15 @@ public class UpdateAction extends LookupDispatchAction {
     	//更新処理成功
     	if (count > 0){
     		return mapping.findForward("finish");
+        }else{
+			SysDataDto SysDataDto = new SysDataDto();
+			SysDataDto.setErrorMessage( "更新処理が失敗しました");
+	        request.setAttribute("SysDataDto", SysDataDto);
         }
+
+
     	return mapping.findForward("error");
+
 
     }
 }

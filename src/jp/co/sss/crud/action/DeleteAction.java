@@ -74,7 +74,7 @@ public class DeleteAction extends LookupDispatchAction {
     	}
 
 
-        return mapping.findForward("top");
+        return mapping.findForward("error");
 
     }
 
