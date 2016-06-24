@@ -53,7 +53,7 @@ public class EmployeeDAO {
      */
 	public List<Employee> findAll() {
 
-		String sql = "select * from employee order by emp_id ASC";
+		String sql = "select * from employee";
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();
@@ -71,7 +71,7 @@ public class EmployeeDAO {
 	 * @return empData EmployeeテーブルのEntityList
 	 */
 	public List<Employee> findAllById(int empId) {
-		String sql = "select * from employee where emp_id = ? order by emp_id ASC";
+		String sql = "select * from employee where emp_id = ?";
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();
@@ -132,7 +132,7 @@ public class EmployeeDAO {
 	 * @return empData EmployeeテーブルのEntityの一行
 	 */
 	public Employee findById(int empId) {
-		String sql = "select * from employee where emp_id = ? order by emp_id ASC";
+		String sql = "select * from employee where emp_id = ?";
 
 		DBAccess access = new DBAccess();
 		List<Employee> empDataList = access.select(sql, allMapping, empId);

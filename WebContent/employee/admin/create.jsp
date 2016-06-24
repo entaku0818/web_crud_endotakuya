@@ -54,26 +54,28 @@
 					</div>
 
 					<div class="form-group">
-		    			<label class="column">社員名</label>
+		    			<span class="column">社員名</span>
 		    			<html:text styleId="empName"  property="empName" value=""/>
 
 	    				<div id="chkEmpNameMsg"></div>
 	    			</div>
 					<div class="form-group">
-		    			<label class="column">性別</label>
+		    			<span class="column">性別</span>
 		    				<input type="radio" id="gender" name="gender" value="1" checked="checked">男
 			    			<input type="radio" id="gender" name="gender" value="2" >女
 	    			</div>
 					<div class="form-group">
-		    			<label class="column">住所</label>
+		    			<span class="column">住所</span>
 		    			<html:text styleId="address" property="address" value=""/>
 
 	    				<div id="chkAddressMsg"></div>
 	    			</div>
-	    			<p>
-		    			<label class="column">生年月日</label>
+	    			<div class="form-group">
+		    			<span class="column">生年月日</span>
 		    			<input type="date" Id="birthday"  name="birthday" value="">
-	    			</p>
+
+	    				<div id="chkAddressMsg"></div>
+	    			</div>
 	    				<div id="chkBirthdayMsg"></div>
 	    			<p>
 		    			<label class="column">権限</label>

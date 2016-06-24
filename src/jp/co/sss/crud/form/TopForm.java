@@ -19,6 +19,7 @@ public class TopForm extends ActionForm {
     private int findId = 0;
     private String findName = null;
     private int findDeptId = 0;
+    private int pageNo = 0;
 
 
 
@@ -72,6 +73,19 @@ public class TopForm extends ActionForm {
 	public void setFindDeptId(int findDeptId) {
 		this.findDeptId = findDeptId;
 	}
+	/**
+	 * @return pageNo
+	 */
+	public int getPageNo() {
+		return pageNo;
+	}
+	/**
+	 * @param pageNo セットする pageNo
+	 */
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
 
 
 

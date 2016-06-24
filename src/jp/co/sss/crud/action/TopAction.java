@@ -3,9 +3,13 @@ package jp.co.sss.crud.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.sss.crud.dto.PagingDto;
 import jp.co.sss.crud.dto.UserEmpDto;
+import jp.co.sss.crud.form.TopForm;
+
 import jp.co.sss.crud.service.DepartmentService;
 import jp.co.sss.crud.service.EmployeeService;
+import jp.co.sss.crud.service.PageService;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -27,8 +31,11 @@ public final class TopAction extends Action {
         HttpServletRequest request,
         HttpServletResponse response) {
 
+		TopForm topForm = (TopForm) form;
+
     	EmployeeService empService = new EmployeeService();
     	DepartmentService deptService = new DepartmentService();
+    	PageService pageService = new PageService();
 
     	//ユーザー情報を全件取得
     	UserEmpDto[] userEmpDto = empService.getAllEmpData();
@@ -36,6 +43,12 @@ public final class TopAction extends Action {
     	//部署情報の動的なselectボタンのデータの生成
     	UserEmpDto[] selectDeptDto = deptService.getUserEmpDto();
 
+
+		PagingDto pagingDto = pageService.getPagingInfo(userEmpDto, 5, topForm.getPageNo());
+
+
+    	//Httpセッションへページング情報を格納する
+        request.setAttribute("pagingDto", pagingDto);
 
     	//Httpセッションへ社員情報を格納する
         request.setAttribute("userEmpDto", userEmpDto);

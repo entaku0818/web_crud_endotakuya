@@ -120,7 +120,8 @@ public class EmployeeService {
 	 */
 	public int createData(ChangeForm changeForm ) {
 		EmployeeDAO empDao = new EmployeeDAO();
-		int count = empDao.insert( this.setEntityFromForm(changeForm) );
+		int count = 0;
+		count = empDao.insert( this.setEntityFromForm(changeForm) );
 
 		return count;
 
@@ -128,13 +129,13 @@ public class EmployeeService {
 
 	/**
 	 * changeFormで受け取ったデータを更新するメソッド
-	 * @param empId
 	 * @param ChangeForm
 	 * @return 更新件数
 	 */
 	public int updateData(ChangeForm changeForm) {
 		EmployeeDAO empDao = new EmployeeDAO();
-		int count = empDao.update( this.setEntityFromForm(changeForm) );
+		int count = 0;
+		count = empDao.update( this.setEntityFromForm(changeForm) );
 
 		return count;
 
@@ -143,14 +144,14 @@ public class EmployeeService {
 	/**
 	 * TopFormで受け取ったデータを更新するメソッド
 	 * @param empId
-	 * @param ChangeForm
 	 * @return　削除件数
 	 */
-	public int deleteData(int empId) {
+	public int deleteData(int empId,int userId) {
 		EmployeeDAO empDao = new EmployeeDAO();
+		int count = 0;
 
-		//entityをDaoへ渡す
-		int count = empDao.deleteById(empId);
+			//entityをDaoへ渡す
+			count = empDao.deleteById(empId);
 
 		return count;
 	}

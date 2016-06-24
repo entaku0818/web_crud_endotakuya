@@ -17,7 +17,7 @@
 <div id="contents">
 		<div id="header">
 			<h1>社員一覧表示画面</h1>
-			<img src="<html:rewrite page="/img/employee.jpg"">
+
 
 			<p>あなたのIDは${id}です</p>
 
@@ -45,7 +45,7 @@
 					<div id="main">
 
 			<!-- エラーメッセージの表示-->
-				${errorMessage}
+				<div class="errorMessage">${SysDataDto.errorMessage}</div>
 			<!-- エラーメッセージの表示-->
 
 			<!-- 検索フォーム ↓-->

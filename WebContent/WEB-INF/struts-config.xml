@@ -45,8 +45,8 @@
     </action>
     <!-- deleteActionの実装 -->
     <action path="/employee/admin/delete" name="topForm" type="jp.co.sss.crud.action.DeleteAction" parameter="method">
-      <forward name="check" path="/employee/admin/chkDelete.jsp"/>
       <forward name="finish" path="/employee/admin/finDelete.jsp"/>
+      <forward name="top" path="/employee/top.do"/>
     </action>
 
 

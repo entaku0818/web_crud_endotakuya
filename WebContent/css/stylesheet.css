@@ -78,6 +78,11 @@ div#main .form-group {
     text-align: center;
 }
 
+div#main .errorMessage {
+    color: red;
+    font-size: 16pt;
+}
+
 
 div#footer{
 	height: 100px;
