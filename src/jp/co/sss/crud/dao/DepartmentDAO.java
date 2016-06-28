@@ -7,6 +7,7 @@ import java.util.List;
 import jp.co.sss.crud.db.DBAccess;
 import jp.co.sss.crud.db.ResultSetBeanMapping;
 import jp.co.sss.crud.entity.Department;
+import jp.co.sss.crud.util.SysDataImport;
 
 
 
@@ -14,8 +15,7 @@ import jp.co.sss.crud.entity.Department;
 public class DepartmentDAO {
 
 	/**
-	 * ResultSetの一行をEmployeeのインスタンスに変換するクラス
-	 * ここでしか利用されないので、
+	 * ResultSetの一行をEmployeeのインスタンスに変換するクラス、
 	 * 無名クラスとして、この場所でインスタンス化します。
 	 */
     private ResultSetBeanMapping<Department> allMapping = new ResultSetBeanMapping<Department>(){
@@ -35,13 +35,16 @@ public class DepartmentDAO {
 
 
 
-    /**
-     * 全件検索を行います。
-     * 戻り値はDepartmentオブジェクトのListです。
-     */
+   /**
+    *
+    * @return Departmentテーブルのリストオブジェクト
+    */
 	public List<Department> findAll() {
 
-		String sql = "select * from department order by dept_id ASC";
+		SysDataImport sysDataImport = new SysDataImport();
+
+
+		String sql = sysDataImport.confImport().getDeptFindAll();
 
 		DBAccess access = new DBAccess();
 		List<Department> deptData = null;
@@ -56,7 +59,9 @@ public class DepartmentDAO {
 	 * @return empData DepartmentテーブルのEntity
 	 */
 	public Department findById(int deptId) {
-		String sql = "select * from Department where dept_id = ? AND rownum = 1";
+
+		SysDataImport sysDataImport = new SysDataImport();
+		String sql =  sysDataImport.confImport().getDeptFindById();
 
 		DBAccess access = new DBAccess();
 		Department deptData = null;

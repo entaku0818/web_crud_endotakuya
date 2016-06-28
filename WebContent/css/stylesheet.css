@@ -7,6 +7,23 @@ body{
 
 
 
+/*ヘッターの設定*/
+div#header .login-id{
+	text-align: right;
+	color: #FFFFFF;
+	font-size: 16px;
+}
+div#header .create{
+	text-align: right;
+}
+div#header .logout{
+	text-align: right;
+}
+div#header .icon {
+    width: 100px;
+    height: 75px;
+}
+/*ヘッターの設定*/
 
 
 
@@ -28,24 +45,11 @@ div#header{
 }
 div#header h1{
 	margin: 0px;
-	font-size: 16px;
-	color: #FFFFFF;
-}
-div#header p{
-	text-align: right;
+	font-size: 24px;
 	color: #FFFFFF;
 }
 
-div#header .create{
-	text-align: right;
-}
-div#header .logout{
-	text-align: right;
-}
-div#header .icon {
-    width: 100px;
-    height: 75px;
-}
+
 
 
 div#container{
@@ -59,8 +63,13 @@ div#main {
     background-color: #FFFFFF;
     position: relative;
     left: 0px;
+    display: table;
 }
 
+
+div#main h2 {
+    text-align: center;
+}
 
 div#main .find {
     text-align: center;
@@ -68,20 +77,8 @@ div#main .find {
 div#main .top {
     text-align: center;
 }
-div#main .column {
-    display: inline-block;
-    width: 100px;
-    text-align: left;
-}
 
-div#main .form-group {
-    text-align: center;
-}
 
-div#main .errorMessage {
-    color: red;
-    font-size: 16pt;
-}
 
 
 div#footer{
@@ -93,15 +90,90 @@ div#footer{
 }
 /*全体のレイアウトの指定 ↑ここまで*/
 
-
-/*LoginFormのCSS設定 ↓ここから*/
+/*Form共通設定*/
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="date"] {
     width: 300px;
     padding: 4px;
     font-size: 14px;
     }
+
+/*Form共通設定*/
+
+
+
+/*データ検索結果のCSS設定 ↓ここから*/
+div#main .page {
+    text-align: center;
+}
+/*データ検索結果のCSS設定 ここから*/
+
+
+/* 終了ページのCSS設定 */
+div#main .finish-contents {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+
+
+div#main .finish-message {
+    font-size: 20pt;
+    color: green;
+}
+/* 終了ページのCSS設定 */
+
+
+
+/*LoginFormのCSS設定 ↓ここから*/
+
+
+
+div#main .login-contents {
+    text-align: center;
+}
+
+div#main  .loginForm {
+    display: inline-block;
+}
+
+div#main  .submit {
+    text-align: right;
+}
+div#main .errorMessage {
+    color: red;
+    font-size: 14pt;
+    text-align: left;
+}
+
 /*LoginFormのCSS設定 ↑ここから*/
+
+
+
+/*登録FormのCSS設定 ↓ここから*/
+div#main .change-contents {
+    text-align: center;
+}
+
+
+div#main .changeForm {
+    display: inline-block;
+}
+
+div#main .column {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+}
+
+div#main  .value {
+    display: inline-block;
+    width: 320px;
+}
+/*登録FormのCSS設定 ↓ここから*/
+
 
 
 

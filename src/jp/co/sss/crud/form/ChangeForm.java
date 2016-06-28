@@ -5,7 +5,7 @@ package jp.co.sss.crud.form;
 import org.apache.struts.action.ActionForm;
 
 /**
- *
+ * Employeeデータ作成・更新・削除用のフォーム
  * @author Edu
  *
  */

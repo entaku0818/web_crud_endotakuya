@@ -19,12 +19,15 @@
 			<h1>社員登録画面</h1>
 
 
-			<p>あなたのIDは${id}です</p>
+
+						<div class="login-id">
+							<p>あなたのIDは${id}です</p>
+						</div>
 
 								<!-- 登録ボタン-->
 								<html:form styleClass="create" method="POST" action="/employee/change.do">
                      						 <html:submit property="method" value="登録">
-                             					<bean:message key = "button.create"/>
+                             					<bean:message key = "button.create.check"/>
                       						</html:submit>
                					</html:form>
                					<!-- 登録ボタン-->
@@ -38,6 +41,7 @@
 
 
 
+
 			<div id="menu">
 			</div>
 		</div>
@@ -46,24 +50,77 @@
 
 
 
+
 			<!-- 登録内容Check ↓-->
+			<div class="change-contents">
+				<html:form styleClass="changeForm" method="POST" action="/employee/admin/create.do" onsubmit="return changeCheck()">
+					<div class="form-group">
+		    			<span class="column">パスワード: </span>
+		    			<span class="value">
+		    			${userEmpDto.empPass}
+						</span>
+						<div id="chkEmpPassMsg"></div>
+					</div>
 
-				<html:form method="POST" action="/employee/admin/create.do" onsubmit="return changeCheck()">
+					<div class="form-group">
+		    			<span class="column">社員名:</span>
+		    			<span class="value">
+		    			${userEmpDto.empName}
+						</span>
+	    				<div id="chkEmpNameMsg"></div>
+	    			</div>
+					<div class="form-group">
+		    			<span class="column">性別</span>
+		    			<span class="value">
+		    			 ${userEmpDto.genderName}
+						</span>
+	    			</div>
+					<div class="form-group">
+		    			<span class="column">住所</span>
+		    			<span class="value">
+		    				${userEmpDto.address}
+						</span>
+	    				<div id="chkAddressMsg"></div>
+	    			</div>
+	    			<div class="form-group">
+		    			<span class="column">生年月日</span>
+						<span class="value">
+		    			${userEmpDto.birthday}
+						</span>
+	    				<div id="chkBirthdayMsg"></div>
+	    			</div>
 
-									<p>社員名: ${userEmpDto.empName}</p>
-									<p>パスワード: ${userEmpDto.empPass}</p>
-									<p>性別: ${userEmpDto.genderName}<p>
-									<p>住所: ${userEmpDto.address}<p>
-									<p>生年月日:${userEmpDto.birthday}<p>
-									<p>権限: ${userEmpDto.authorityName}<p>
-									<p>部署名: ${userEmpDto.deptName}<p>
+	    			<div class="form-group">
+		    			<span class="column">権限</span>
+		    			<span class="value">
+			    			${userEmpDto.authorityName}
+						</span>
+	    			</div>
 
-					<html:submit property="method" value='OK'>
+	    			<div class="form-group">
+		    			<span class="column">部署ID</span>
+		    			<span class="value">
+		    				${userEmpDto.deptName}
+						</span>
+	    			</div>
+
+
+
+
+
+                   <html:submit property="method" value='OK'>
                             <bean:message key="button.finish"/>
                     </html:submit>
 
 
 				</html:form>
+
+				<html:form method="POST" action="/employee/change.do" >
+						<html:submit property="method" >
+                            <bean:message key="button.top" />
+                    	</html:submit>
+				</html:form>
+			</div>
 
 			<!-- 登録内容Check ↑-->
 

@@ -1,11 +1,17 @@
 package jp.co.sss.crud.dto;
 
+
+/**
+ * ページング処理情報格納用DTO
+ * @author Edu
+ *
+ */
 public class PageDto {
 
 
 	 private boolean hasPrev;
 	private boolean hasNext;
-
+	private UserEmpDto[] userEmpDto;
 	/**
 	 * 現在のページナンバー
 	 */
@@ -46,6 +52,18 @@ public class PageDto {
 	 */
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
+	}
+	/**
+	 * @return userEmpDto
+	 */
+	public UserEmpDto[] getUserEmpDto() {
+		return userEmpDto;
+	}
+	/**
+	 * @param userEmpDto セットする userEmpDto
+	 */
+	public void setUserEmpDto(UserEmpDto[] userEmpDto) {
+		this.userEmpDto = userEmpDto;
 	}
 
 

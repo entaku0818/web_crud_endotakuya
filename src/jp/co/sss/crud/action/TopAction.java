@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import jp.co.sss.crud.dto.PageDto;
 import jp.co.sss.crud.dto.UserEmpDto;
-import jp.co.sss.crud.form.TopForm;
 
 import jp.co.sss.crud.service.DepartmentService;
 import jp.co.sss.crud.service.EmployeeService;
@@ -32,7 +31,7 @@ public final class TopAction extends Action {
 	/**
 	 * 1ページあたりの件数
 	 */
-	public final int PAGE_COUNT = 10;
+	private static final int PAGE_COUNT = 10;
 
 	public ActionForward execute(
         ActionMapping mapping,
@@ -52,7 +51,7 @@ public final class TopAction extends Action {
 
     	//現在見ているページ
     	int selectPage = 0;
-
+    	String errorMessage = null;
 
     	if (request.getParameter("pageNo") != null){
     		//現在選択されているページを取得
@@ -60,30 +59,29 @@ public final class TopAction extends Action {
     	}
 
     	//現在選択されているページのユーザー情報を取得
-    	UserEmpDto[] userEmpDto = empService.getAllEmpData(selectPage, PAGE_COUNT);
-
-
-		PageDto pageDto = new PageDto();
-
-		pageDto.setPageNo(selectPage);
-
- 	   if(selectPage != 0){
- 		  pageDto.setHasPrev(true);
-		  }
-		if((selectPage + 1) * PAGE_COUNT <  empService.getCountAll() ){
-		  pageDto.setHasNext(true);
-		}
+    	PageDto pageDto = empService.getAllEmpData(selectPage, PAGE_COUNT);
 
 
 
-		//Httpセッションへ社員情報を格納する
+    	if (request.getParameter("errorMessage") != null){
+    		//リクエストへ格納されているエラーメッセージを取得する
+    		errorMessage = request.getParameter("errorMessage");
+    	}
+
+
+
+		//Httpセッションへページ情報を格納する
         request.setAttribute("pageDto", pageDto);
 
     	//Httpセッションへ社員情報を格納する
-        request.setAttribute("userEmpDto", userEmpDto);
+        request.setAttribute("userEmpDto", pageDto.getUserEmpDto());
 
         //Httpセッションへ部署情報を格納する
         request.setAttribute("selectDeptDto", selectDeptDto);
+
+
+		//Httpセッションへ部署情報を格納する
+        request.setAttribute("errorMessage", errorMessage);
 
     	return mapping.findForward("success");
     }

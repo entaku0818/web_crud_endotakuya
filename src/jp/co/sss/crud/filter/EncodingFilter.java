@@ -10,7 +10,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-
+/**
+ * エンコーディング用フィルター
+ * @author Edu
+ *
+ */
 public class EncodingFilter implements Filter {
 
     public void init(FilterConfig filterConfig)

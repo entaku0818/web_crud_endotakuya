@@ -3,7 +3,7 @@ package jp.co.sss.crud.form;
 import org.apache.struts.action.ActionForm;
 
 /**
- *
+ * TOPページ用のフォーム
  * @author Edu
  *
  */
@@ -14,11 +14,25 @@ public class TopForm extends ActionForm {
 
 
 
-
+	/**
+	 * 検索条件
+	 */
 	private String findColumn = null;
+	/**
+	 * 検索用empId
+	 */
     private int findId = 0;
+	/**
+	 * 検索用empName
+	 */
     private String findName = null;
+	/**
+	 * 検索用deptId
+	 */
     private int findDeptId = 0;
+    /**
+     * ページ番号
+     */
     private int pageNo = 0;
 
 

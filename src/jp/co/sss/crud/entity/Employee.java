@@ -2,6 +2,11 @@ package jp.co.sss.crud.entity;
 
 import java.util.Date;
 
+/**
+ * Employeeテーブル用のEntityクラス
+ * @author Edu
+ *
+ */
 public class Employee {
 
 	    /**

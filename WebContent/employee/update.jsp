@@ -19,12 +19,15 @@
 			<h1>社員更新画面</h1>
 
 
-			<p>あなたのIDは${id}です</p>
+
+						<div class="login-id">
+							<p>あなたのIDは${id}です</p>
+						</div>
 
 								<!-- 登録ボタン-->
 								<html:form styleClass="create" method="POST" action="/employee/change.do">
                      						 <html:submit property="method" value="登録">
-                             					<bean:message key = "button.create"/>
+                             					<bean:message key = "button.create.check"/>
                       						</html:submit>
                					</html:form>
                					<!-- 登録ボタン-->
@@ -44,48 +47,56 @@
 			<div id="container">
 					<div id="main">
 
-
-
-			<!-- 変更フォーム ↓-->
+						<!-- 登録フォーム ↓-->
+			<div class="change-contents">
 				<html:form method="POST" action="/employee/update.do" onsubmit="return changeCheck()">
-					<p>
-		    			<html:hidden property="empId" value="${userEmpDto.empId}"/>
-
-	    			</p>
-					<p>
-		    			パスワード
-		    			<html:text styleId="empPass"  property="empPass" value="${userEmpDto.empPass}"/>
-	    			</p>
-						<div id="chkEmpPassMsg"></div>
-
-
-					<p>
-		    			社員名
-		    			<html:text styleId="empName"  property="empName" value=" ${userEmpDto.empName}"/>
-	    			</p>
+						<html:hidden property="empId"  value="${userEmpDto.empId}"></html:hidden>
+						<div class="form-group">
+		    			<span class="column">社員名</span>
+		    			<span class="value">
+		    			<html:text styleId="empName"  property="empName" value="${userEmpDto.empName}"/>
+						</span>
 	    				<div id="chkEmpNameMsg"></div>
+	    			</div>
 
-					<p>
-		    			性別
+					<div class="form-group">
+		    			<span class="column">パスワード</span>
+		    			<span class="value">
+		    				<html:text styleId="empPass"  property="empPass" value="${userEmpDto.empPass}"/>
+						</span>
+						<div id="chkEmpPassMsg"></div>
+					</div>
+
+
+					<div class="form-group">
+		    			<span class="column">性別</span>
+		    			<span class="value">
 		    				<input type="radio" id="gender" name="gender" value="1"
 		    					<c:if test="${userEmpDto.gender==1}" >checked</c:if>
 		    				>男
 			    			<input type="radio" id="gender" name="gender" value="2"
 			    			<c:if test="${userEmpDto.gender==2}" >checked</c:if>
 			    			>女
-	    			</p>
-					<p>
-		    			住所
-		    			<html:text styleId="address"  property="address" value="${userEmpDto.address}"/>
-	    			</p>
+						</span>
+	    			</div>
+					<div class="form-group">
+		    			<span class="column">住所</span>
+		    			<span class="value">
+		    				<html:text styleId="address" property="address" value="${userEmpDto.address}"/>
+						</span>
 	    				<div id="chkAddressMsg"></div>
-	    			<p>
-		    			生年月日
-		    			<input type="text" Id="birthday"  name="birthday" value="${userEmpDto.birthday}">
-		    			<div id="chkBirthdayMsg"></div>
-	    			</p>
-	    			<p>
-		    			権限${userEmpDto.authority}
+	    			</div>
+	    			<div class="form-group">
+		    			<span class="column">生年月日</span>
+						<span class="value">
+		    			<input class="birthday" type="date" Id="birthday"  name="birthday" value="${userEmpDto.birthday}">
+						</span>
+	    				<div id="chkBirthdayMsg"></div>
+	    			</div>
+
+	    			<div class="form-group">
+		    			<span class="column">権限</span>
+		    			<span class="value">
 		    				<input type="radio" id="authority" name="authority" value="1"
 			    				<c:if test="${userEmpDto.authority==1}" >checked</c:if>
 
@@ -93,23 +104,36 @@
 			    			<input type="radio" id="authority" name="authority" value="2"
 			    				<c:if test="${userEmpDto.authority==2}" >checked</c:if>
 							>管理者
-	    			</p>
-	    			<p>
-		    			部署ID
-		    				${userEmpDto.deptId}
+						</span>
+	    			</div>
+
+	    			<div class="form-group">
+		    			<span class="column">部署ID</span>
+		    			<span class="value">
 		    				<html:select property="deptId" >
 	    					<html:options collection="selectDeptDto" property="deptId" labelProperty="deptName"/>
 					</html:select>
-	    			</p>
+						</span>
+	    			</div>
 
 
-					<html:submit property="method"  value="更新">
-                            <bean:message key="button.check" />
+
+
+					<html:submit property="method">
+                            <bean:message key="button.update.check" />
                     </html:submit>
 
 
 				</html:form>
-			<!-- 変更フォーム ↑-->
+
+				<html:form method="POST" action="/employee/change.do" >
+						<html:submit property="method" >
+                            <bean:message key="button.top" />
+                    	</html:submit>
+				</html:form>
+			</div>
+			<!-- 登録フォーム ↑-->
+
 
 
 					</div>

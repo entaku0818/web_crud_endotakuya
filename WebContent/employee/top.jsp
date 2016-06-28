@@ -18,8 +18,9 @@
 		<div id="header">
 			<h1>社員一覧表示画面</h1>
 
-
-			<p>あなたのIDは${id}です</p>
+						<div class="login-id">
+							<p>あなたのIDは${id}です</p>
+						</div>
 
 								<!-- 登録ボタン-->
 								<html:form styleClass="create" method="POST" action="/employee/change.do">
@@ -67,6 +68,7 @@
 
 				</html:form>
 			<!-- 検索フォーム ↑-->
+			<br>
 
 
 			<!-- 検索結果 ↓-->
@@ -114,17 +116,7 @@
 							</table>
 
 				</c:if>
-					<!-- ページング処理 ↓-->
 
-					<c:if test="${pageDto.hasPrev}" >
-						<html:link action="/employee/top.do?pageNo=${pageDto.pageNo - 1}" >＜Prev</html:link>
-					</c:if>
-
-
-					<c:if test="${pageDto.hasNext}" >
-						<html:link action="/employee/top.do?pageNo=${pageDto.pageNo + 1}" >Next＞</html:link>
-					</c:if>
-					<!-- ページング処理 ↑-->
 
 
 
@@ -139,12 +131,27 @@
 
 
 
-
+					<!-- TOPへ戻る ↓-->
 				<html:form styleClass="top" method="POST" action="/employee/change.do" >
 						<html:submit property="method" >
                             <bean:message key="button.top" />
                     	</html:submit>
 				</html:form>
+					<!-- TOPへ戻る ↑-->
+
+					<!-- ページング処理 ↓-->
+				<div class="page">
+					<c:if test="${pageDto.hasPrev}" >
+						<html:link action="/employee/top.do?pageNo=${pageDto.pageNo - 1}" >＜Prev</html:link>
+					</c:if>
+
+
+					<c:if test="${pageDto.hasNext}" >
+						<html:link action="/employee/top.do?pageNo=${pageDto.pageNo + 1}" >Next＞</html:link>
+					</c:if>
+				</div>
+					<!-- ページング処理 ↑-->
+
 
 
 					</div>

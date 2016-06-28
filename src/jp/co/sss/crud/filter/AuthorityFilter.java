@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -13,6 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.co.sss.crud.dto.SysDataDto;
+
+
+
+/**
+ *
+ * @author Edu
+ *　操作権限判定用フィルター
+ */
 public class AuthorityFilter implements Filter {
 
     public void init(FilterConfig filterConfig)
@@ -36,13 +46,17 @@ public class AuthorityFilter implements Filter {
 
         if(authority != 2){
 
-        	String errorMessage = "管理者以外のユーザーのため、操作を実行できません";
 
-        	req.setAttribute("errorMessage", errorMessage);
+			SysDataDto SysDataDto = new SysDataDto();
+			SysDataDto.setErrorMessage( "管理者以外のユーザーのため、操作を実行できません");
+	        request.setAttribute("SysDataDto", SysDataDto);
 
-            //セッションがないのでログイン画面へ遷移"
-            res.sendRedirect( req.getContextPath() + "/employee/top.do" );
-            return;
+	        String URL = "/employee/top.do";
+	        RequestDispatcher dispatch = request.getRequestDispatcher(URL);
+
+	        dispatch.forward(request, response);
+
+        	return;
         }
 
 

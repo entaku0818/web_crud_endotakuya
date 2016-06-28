@@ -35,26 +35,28 @@
 
 
 					<!-- ログインフォームの表示-->
-					<html:form method="POST" action="/login.do" onsubmit="return loginCheck()">
+			<div class="login-contents">
+					<html:form styleClass="loginForm" method="POST" action="/login.do" onsubmit="return loginCheck()">
 
 					<div class="form-group">
 		    			<label class="column">ID:</label>
 		    			<html:text styleId="empName"  property="id" name="id" value="" />
 
-	    				<div id="chkIdMsg"></div>
+	    				<div class="errorMessage"  id="chkIdMsg"></div>
 	    			</div>
 
 					<div class="form-group">
 		    			<label class="column">PASSWORD:</label>
 		    			<html:password property="password"  name="password" value=""/>
 
-	    				<div id="chkPasswordMsg"></div>
+	    				<div class="errorMessage" id="chkPasswordMsg"></div>
 	    			</div>
 
 
-							    <br>
-							    <html:submit>ログイン</html:submit>
-							  </html:form>
+					<div class="submit"><html:submit>ログイン</html:submit></div>
+					</html:form>
+			</div>
+
 					<!-- ログインフォームの表示-->
 
 					</div>

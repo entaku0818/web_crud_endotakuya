@@ -9,6 +9,10 @@ import jp.co.sss.crud.entity.Department;
 
 public class DepartmentService {
 
+	/**
+	 * 部署情報取得用メソッド
+	 * @return
+	 */
 	public UserEmpDto[] getUserEmpDto()  {
 
 		//deptDataは更新削除が発生する場合があるため、List

@@ -5,7 +5,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import jp.co.sss.crud.dto.SysDataDto;
 import jp.co.sss.crud.dto.UserEmpDto;
 import jp.co.sss.crud.form.TopForm;
 import jp.co.sss.crud.service.DepartmentService;
@@ -16,6 +18,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.LookupDispatchAction;
 
+/**
+ * 更新処理に関するアクションをまとめたクラス
+ * @author Edu
+ *
+ */
 public class ChangeAction extends LookupDispatchAction {
 
     protected Map<String, String> getKeyMethodMap() {
@@ -69,16 +76,20 @@ public class ChangeAction extends LookupDispatchAction {
         //Httpセッションへ部署情報を格納する
         request.setAttribute("selectDeptDto", selectDeptDto);
 
-
+    	HttpSession session = request.getSession(true);
+    	int empId = (Integer) session.getAttribute("id");
 
         //Topページで指定したFindIdを取得
         findEmp.setEmpId(topForm.getFindId());
-
+        
         //Topページで指定したFindIdのデータを取得
         UserEmpDto userEmpDto = empService.getEmpData("empId",  findEmp);
 
         request.setAttribute("userEmpDto", userEmpDto);
-
+        
+        if(empId == findEmp.getEmpId() ){
+        	
+        }
     	return mapping.findForward("update");
     }
 
@@ -111,6 +122,20 @@ public class ChangeAction extends LookupDispatchAction {
         //取得したemployeeデータをリクエストへsetする
     	request.setAttribute("userEmpDto", userEmpDto);
 
+
+    	//セッションからID情報を取得する
+    	HttpSession session = request.getSession(true);
+    	int userId = (Integer) session.getAttribute("id");
+
+
+    	//Httpセッションへ社員情報を格納する
+		if(topForm.getFindId() == userId){
+			SysDataDto SysDataDto = new SysDataDto();
+			SysDataDto.setErrorMessage( "自分自身を削除することはできません。");
+	        request.setAttribute("SysDataDto", SysDataDto);
+
+	        return mapping.findForward("top");
+		}
 
         return mapping.findForward("delete");
 

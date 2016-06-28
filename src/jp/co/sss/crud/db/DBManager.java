@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import jp.co.sss.crud.util.SysDataImport;
+
 
 
 
@@ -31,9 +33,12 @@ public class DBManager {
 	 */
     public Connection getConn()  {
 
+    	SysDataImport sysDataImport = new SysDataImport();
+
+
         // JDBCドライバクラスをJVMに登録
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+    	try {
+            Class.forName( sysDataImport.confImport().getDatabaseDriver() );
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -41,8 +46,8 @@ public class DBManager {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:XE",
-                    "web_crud_user", "systemsss");
+            		sysDataImport.confImport().getDatabaseConnect(),
+            		sysDataImport.confImport().getDatabaseUser(), sysDataImport.confImport().getDatabasePassword());
         } catch (SQLException e) {
         	//DataBaseへ接続できない場合
             e.printStackTrace();

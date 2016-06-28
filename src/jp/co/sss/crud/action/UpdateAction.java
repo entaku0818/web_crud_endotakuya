@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.co.sss.crud.dto.SysDataDto;
 import jp.co.sss.crud.dto.UserEmpDto;
@@ -19,12 +20,16 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.LookupDispatchAction;
 
 
-
+/**
+ *
+ * @author Edu
+ *更新処理に関するアクションをまとめたクラス
+ */
 public class UpdateAction extends LookupDispatchAction {
 
     protected Map<String, String> getKeyMethodMap() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("button.check", "check");
+        map.put("button.update.check", "check");
         map.put("button.finish", "finish");
 
         return map;
@@ -71,6 +76,7 @@ public class UpdateAction extends LookupDispatchAction {
 			SysDataDto.setErrorMessage( "更新処理が失敗しました");
 	        request.setAttribute("SysDataDto", SysDataDto);
         }
+    	
 
 
     	return mapping.findForward("error");

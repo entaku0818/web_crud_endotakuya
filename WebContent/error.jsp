@@ -27,6 +27,10 @@
 		<div id="container">
 					<div id="main">
 						  		<h2>ログインエラー</h2>
+
+			<!-- エラーメッセージの表示-->
+				<div class="errorMessage">${SysDataDto.errorMessage}</div>
+			<!-- エラーメッセージの表示-->
 							<html:link page="/">ログイン画面へ戻る</html:link>
 
 					</div>

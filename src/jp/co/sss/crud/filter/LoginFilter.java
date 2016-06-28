@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -13,8 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.co.sss.crud.db.DBManager;
+import jp.co.sss.crud.dto.SysDataDto;
 
+
+
+
+/**
+ * ログイン可否判定用フィルター
+ * @author Edu
+ *
+ */
 public class LoginFilter implements Filter {
 
     public void init(FilterConfig filterConfig)
@@ -31,16 +40,21 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
+
         HttpSession session = (HttpSession) req.getSession();
 
 
         //sessionからidが取得できなければ、ログインしていないとみなす
         if(session.getAttribute("id") == null){
+			SysDataDto SysDataDto = new SysDataDto();
+			SysDataDto.setErrorMessage( "セッションが切断されました。再度ログインしてください。");
+	        request.setAttribute("SysDataDto", SysDataDto);
 
-        	String errorMessage = "セッションが切断されました。再度ログインしてください。";
-        	request.setAttribute("errorMessage", errorMessage);
+	        String URL = "/error.jsp";
+	        RequestDispatcher dispatch = request.getRequestDispatcher(URL);
 
-        	res.sendRedirect(req.getContextPath());
+	        dispatch.forward(request, response);
+
         	return;
 
         }
@@ -54,7 +68,9 @@ public class LoginFilter implements Filter {
         return;
     }
 
-    public void destroy() {
+
+
+	public void destroy() {
         //何もしない
     }
 

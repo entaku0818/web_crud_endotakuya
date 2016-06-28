@@ -19,18 +19,26 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.LookupDispatchAction;
 
 
-
+/**
+ * 新規登録に関するアクションをまとめたクラス
+ * @author Edu
+ *
+ */
 public class CreateAction extends LookupDispatchAction {
 
     protected Map<String, String> getKeyMethodMap() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("button.check", "check");
+        map.put("button.create.check", "check");
         map.put("button.finish", "finish");
 
         return map;
     }
 
-
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public ActionForward check(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {

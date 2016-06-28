@@ -18,7 +18,7 @@ function findCheck(){
 	// 取得する
 	if (document.getElementById("empId").checked){
 		if (document.getElementById("findId").value < findIdMin || document.getElementById("findId").value > findIdMax){
-			errMsg = errMsg + '<font color="red">社員IDは半角数字' + findIdMin + '以上' + findIdMax + '文字で入力してください</font><br>' ;
+			errMsg = errMsg + '<font color="red">社員IDは半角数字' + findIdMin + '以上' + findIdMax + 'で入力してください</font><br>' ;
 
 			flag = false;
 		}
@@ -73,7 +73,7 @@ function loginCheck(){
 	if(document.loginForm.password.value.length < passwordMin || document.loginForm.password.value.length > passwordMax ){
 
 		target = document.getElementById("chkPasswordMsg");
-		target.innerHTML =  '<font color="red">idは' + passwordMin + '文字以上' + passwordMax + '文字以下で入力してください</font>';
+		target.innerHTML =  '<font color="red">パスワードは' + passwordMin + '文字以上' + passwordMax + '文字以下で入力してください</font>';
 		flag = false;
 
 	}

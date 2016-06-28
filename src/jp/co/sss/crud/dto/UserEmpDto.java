@@ -1,5 +1,11 @@
 package jp.co.sss.crud.dto;
 
+
+/**
+ * 検索結果格納用のDTO
+ * @author Edu
+ *
+ */
 public class UserEmpDto {
 
 	    /**

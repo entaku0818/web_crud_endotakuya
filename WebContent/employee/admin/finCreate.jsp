@@ -19,21 +19,15 @@
 			<h1>社員一覧表示画面</h1>
 
 
-			<p>あなたのIDは${id}です</p>
 
-								<html:form method="POST" action="/employee/change.do">
-                     						 <html:submit property="method" value="登録">
-                             					<bean:message key = "button.create"/>
-                      						</html:submit>
-
-               					</html:form>
-
-
+						<div class="login-id">
+							<p>あなたのIDは${id}です</p>
+						</div>
 
 								<!-- 登録ボタン-->
 								<html:form styleClass="create" method="POST" action="/employee/change.do">
                      						 <html:submit property="method" value="登録">
-                             					<bean:message key = "button.create"/>
+                             					<bean:message key = "button.create.check"/>
                       						</html:submit>
                					</html:form>
                					<!-- 登録ボタン-->
@@ -46,6 +40,7 @@
 							  	<!-- ログアウトボタン-->
 
 
+
 			<div id="menu">
 			</div>
 		</div>
@@ -54,13 +49,14 @@
 
 
 
-
-			登録完了しました！！！！
-				<html:form method="POST" action="/employee/change.do" >
+				<div class="finish-contents">
+					<div class=finish-message>登録完了しました！！！！</div>
+									<html:form method="POST" action="/employee/change.do" >
 						<html:submit property="method" >
                             <bean:message key="button.top" />
                     	</html:submit>
-				</html:form>
+					</html:form>
+				</div>
 
 					</div>
 			</div>

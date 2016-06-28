@@ -2,7 +2,6 @@ package jp.co.sss.crud.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import jp.co.sss.crud.dao.DepartmentDAO;
@@ -19,32 +18,54 @@ public class EmployeeService {
 
 
 	/**
-	 * Topページに出力するEmployeeを取得するメソッド
-	 * @param selectPage
-	 * @return
+	 *
+	 * Topページに出力するEmployeeを取得するメソッド(初期TOPページ)
+	 * @param selectPage 現在ページ数
+	 * @param PAGE_COUNT 1ページ単位の件数
+	 * @return DB検索結果を格納したDTO
 	 */
-	public UserEmpDto[] getAllEmpData(int selectPage, int PAGE_COUNT)  {
+	public PageDto getAllEmpData(int selectPage, int PAGE_COUNT)  {
 
-		//empDataは更新削除が発生する場合があるため、List
-		List<Employee> empEntity = new ArrayList<Employee>();
+
 		EmployeeDAO empDao = new EmployeeDAO();
 
 		int startCount = 0;
 		int endCount = 0;
 
+    	//ページング処理に関する情報を取得
+		PageDto pageDto = new PageDto();
+
+		pageDto.setPageNo(selectPage);
+
+ 	   	if(selectPage != 0){
+ 		  pageDto.setHasPrev(true);
+		  }
+		if((selectPage + 1) * PAGE_COUNT <  empDao.findAll().size()  ){
+		  pageDto.setHasNext(true);
+		}
+
+		//取得開始位置を計算する
 		startCount = selectPage * PAGE_COUNT + 1;
-		if((selectPage + 1 ) * PAGE_COUNT > this.getCountAll()){
-			endCount = this.getCountAll();
+
+		//取得終了位置を計算する
+		if( (selectPage + 1 ) * PAGE_COUNT >  empDao.findAll().size() ){
+			endCount = empDao.findAll().size();
 		}else{
 			endCount = (selectPage + 1 ) * PAGE_COUNT;
 		}
+
+
+
+		//1ページ表示する件数によって配列の大きさを変更する
 		UserEmpDto[] empDto = new UserEmpDto[ endCount - startCount + 1 ];
 
-		//empDataへDaoから取得したデータを格納する
-		empEntity = empDao.findAll(startCount ,endCount);
 
+		//Entityへ取得開始⇔取得終了間のデータを格納する
+		//UserEmpDtoへEntityを格納後、ページング処理のためPageDtoへ格納する
+		pageDto.setUserEmpDto( this.setDtoFromEntity(empDto, empDao.findAll(startCount ,endCount) ) );
 
-		return this.setDtoFromEntity(empDto, empEntity);
+		//PageDtoを返却する
+		return pageDto;
 
 	}
 
@@ -56,25 +77,122 @@ public class EmployeeService {
 	 * @param topForm
 	 * @return
 	 */
-	public UserEmpDto[] getAllEmpData(String findColumn, TopForm topForm) {
+	public PageDto getAllEmpData(String findColumn, TopForm topForm, int selectPage, int PAGE_COUNT) {
 
-				//empDataは更新削除が発生する場合があるため、List
 
-				List<Employee> empEntity = new ArrayList<Employee>();
 				EmployeeDAO empDao = new EmployeeDAO();
+
+				int startCount = 0;
+				int endCount = 0;
+
+
+
+
+
+
+				PageDto pageDto = new PageDto();
+				pageDto.setPageNo(selectPage);
 
 				//findColumn の値によって呼び出すDAOのメソッドを変更する
 				if(findColumn.equals("empId")){
-					empEntity = empDao.findAllById(topForm.getFindId());
+
+			 	   	if(selectPage != 0){
+				 		  pageDto.setHasPrev(true);
+						  }
+						if((selectPage + 1) * PAGE_COUNT <  empDao.findAllById( topForm.getFindId()).size() ){
+						  pageDto.setHasNext(true);
+						}
+
+
+					//取得開始位置を計算する
+					startCount = selectPage * PAGE_COUNT + 1;
+
+					//取得終了位置を計算する
+					if( (selectPage + 1 ) * PAGE_COUNT > empDao.findAllById( topForm.getFindId()).size() ){
+						endCount = empDao.findAllById( topForm.getFindId() ).size();
+					}else{
+						endCount = (selectPage + 1 ) * PAGE_COUNT;
+					}
+
+					//1ページ表示する件数によって配列の大きさを変更する
+					UserEmpDto[] empDto = new UserEmpDto[ endCount - startCount + 1 ];
+
+
+					//Entityへ取得開始⇔取得終了間のデータを格納する
+					//UserEmpDtoへEntityを格納後、ページング処理のためPageDtoへ格納する
+					pageDto.setUserEmpDto( this.setDtoFromEntity(empDto, empDao.findAllById(topForm.getFindId() ,startCount ,endCount) ) );
+
 				}else if(findColumn.equals("empName")){
-					empEntity = empDao.findAllByName(topForm.getFindName());
+
+
+				 	if(selectPage != 0){
+				 		  pageDto.setHasPrev(true);
+						  }
+						if((selectPage + 1) * PAGE_COUNT <  empDao.findAllByName( topForm.getFindName()).size() ){
+						  pageDto.setHasNext(true);
+						}
+
+
+					//取得開始位置を計算する
+					startCount = selectPage * PAGE_COUNT + 1;
+
+					//取得終了位置を計算する
+					if( (selectPage + 1 ) * PAGE_COUNT >  empDao.findAllByName( topForm.getFindName() ).size() ){
+						endCount = empDao.findAllByName( topForm.getFindName() ).size();
+					}else{
+						endCount = (selectPage + 1 ) * PAGE_COUNT;
+					}
+
+					//1ページ表示する件数によって配列の大きさを変更する
+					UserEmpDto[] empDto = new UserEmpDto[ endCount - startCount + 1 ];
+
+
+					//Entityへ取得開始⇔取得終了間のデータを格納する
+					//UserEmpDtoへEntityを格納後、ページング処理のためPageDtoへ格納する
+					pageDto.setUserEmpDto( this.setDtoFromEntity(empDto, empDao.findAllByName( topForm.getFindName(),startCount,endCount ) ) );
 				}else if(findColumn.equals("deptName")){
-					empEntity = empDao.findAllByDeptId(topForm.getFindDeptId());
+
+
+				 	if(selectPage != 0){
+				 		  pageDto.setHasPrev(true);
+						  }
+						if((selectPage + 1) * PAGE_COUNT <  empDao.findAllByDeptId( topForm.getFindDeptId()).size() ){
+						  pageDto.setHasNext(true);
+						}
+
+
+					//取得開始位置を計算する
+					startCount = selectPage * PAGE_COUNT + 1;
+
+					//取得終了位置を計算する
+					if( (selectPage + 1 ) * PAGE_COUNT >  empDao.findAllByDeptId( topForm.getFindDeptId() ).size() ){
+						endCount = empDao.findAllByDeptId( topForm.getFindDeptId() ).size();
+					}else{
+						endCount = (selectPage + 1 ) * PAGE_COUNT;
+					}
+
+					//1ページ表示する件数によって配列の大きさを変更する
+					UserEmpDto[] empDto = new UserEmpDto[ endCount - startCount + 1 ];
+
+
+					//Entityへ取得開始⇔取得終了間のデータを格納する
+					//UserEmpDtoへEntityを格納後、ページング処理のためPageDtoへ格納する
+					pageDto.setUserEmpDto( this.setDtoFromEntity(empDto, empDao.findAllByDeptId( topForm.getFindDeptId(),startCount,endCount ) ) );
 				}
 
-				UserEmpDto[] empDto = new UserEmpDto[empEntity.size()];
 
-				return setDtoFromEntity(empDto, empEntity);
+
+
+
+
+
+
+
+
+				//PageDtoを返却する
+				return pageDto;
+
+
 	}
 
 	/**
@@ -99,20 +217,8 @@ public class EmployeeService {
 		return setDtoFromEntity(empDto, empEntity);
 	}
 
-	/**
-	 * Employeeテーブルの件数を取得する
-	 * @param selectPage
-	 * @param PAGE_COUNT
-	 * @return
-	 */
-	public int getCountAll()  {
 
-		//empDataは更新削除が発生する場合があるため、List
-		EmployeeDAO empDao = new EmployeeDAO();
 
-		return empDao.findAll().size();
-
-	}
 
 
 
@@ -169,7 +275,7 @@ public class EmployeeService {
 	 * @param empId
 	 * @return　削除件数
 	 */
-	public int deleteData(int empId,int userId) {
+	public int deleteData(int empId) {
 		EmployeeDAO empDao = new EmployeeDAO();
 		int count = 0;
 
@@ -200,17 +306,13 @@ public class EmployeeService {
 
 
 			empDto[i] = new UserEmpDto();
+
 			empDto[i].setEmpId(empEntity.get(i).getEmpId());
 			empDto[i].setEmpName(empEntity.get(i).getEmpName());
-
 			empDto[i].setGenderName( this.getGenderName( empEntity.get(i).getGender() ) );
-
-
 			empDto[i].setAddress(empEntity.get(i).getAddress());
 			empDto[i].setBirthday( sdf.format(empEntity.get(i).getBirthday()) );
-
 			empDto[i].setAuthorityName( this.getAuthorityName(empEntity.get(i).getAuthority()) );
-
 			// DepartmentDAO経由でDepartmentテーブルから部署名を取得する
 			empDto[i].setDeptName( deptDao.findById( empEntity.get(i).getDeptId() ).getDeptName() );
 
@@ -322,7 +424,7 @@ public class EmployeeService {
 
 
 	/**
-	 *
+	 * 権限名取得用メソッド
 	 * @param authority
 	 * @return
 	 */
@@ -336,7 +438,11 @@ public class EmployeeService {
 
 		return null;
 	}
-
+	/**
+	 * 性別名取得用メソッド
+	 * @param gender
+	 * @return
+	 */
 	private String getGenderName(int gender) {
 
 		if(gender == 1){

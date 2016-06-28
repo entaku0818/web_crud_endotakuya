@@ -1,6 +1,10 @@
 package jp.co.sss.crud.entity;
 
-
+/**
+ * Departmentテーブル用のEntityクラス
+ * @author Edu
+ *
+ */
 public class Department {
 
 	    /**

@@ -13,10 +13,17 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * ログインに関するアクション
+ * @author Edu
+ *
+ */
 public class LoginAction extends Action {
 
 
-
+	/**
+	 * IDとパスワードが一致していれば、success一致しなければerror
+	 */
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -39,10 +46,16 @@ public class LoginAction extends Action {
             session.setAttribute("id", id);
             session.setAttribute("authority", authority );
 
+
+
+
+
         	return mapping.findForward("success");
         }
 
 
         return mapping.findForward("error");
     }
+
+
 }

@@ -3,7 +3,7 @@ package jp.co.sss.crud.form;
 import org.apache.struts.validator.ValidatorForm;
 
 /**
- *
+ *　ログイン用のフォーム
  * @author Edu
  *
  */
