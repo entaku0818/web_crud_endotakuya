@@ -51,7 +51,9 @@
 
 
 			<!-- 変更内容Check ↓-->
+			<div class="change-message">以下の内容で更新します。</div>
 			<div class="change-contents">
+
 				<html:form styleClass="changeForm" method="POST" action="/employee/update.do" onsubmit="return changeCheck()">
 					<div class="form-group">
 		    			<span class="column">パスワード: </span>

@@ -53,7 +53,10 @@ public class SysDataImport {
 
 
 
+		    	String[] columns = properties.getProperty("EmployeeColumns").split(",");
 
+
+	    		sysDataDto.setEmployeeColumns( columns );
 
 
 
@@ -76,7 +79,6 @@ public class SysDataImport {
 		return sysDataDto;
 
 	}
-
 
 
 

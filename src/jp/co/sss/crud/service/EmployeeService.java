@@ -11,6 +11,7 @@ import jp.co.sss.crud.dto.UserEmpDto;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.ChangeForm;
 import jp.co.sss.crud.form.TopForm;
+import jp.co.sss.crud.util.InputCheck;
 
 public class EmployeeService {
 
@@ -29,40 +30,37 @@ public class EmployeeService {
 
 		EmployeeDAO empDao = new EmployeeDAO();
 
-		int startCount = 0;
-		int endCount = 0;
+
 
     	//ページング処理に関する情報を取得
 		PageDto pageDto = new PageDto();
 
 		pageDto.setPageNo(selectPage);
 
- 	   	if(selectPage != 0){
- 		  pageDto.setHasPrev(true);
-		  }
-		if((selectPage + 1) * PAGE_COUNT <  empDao.findAll().size()  ){
-		  pageDto.setHasNext(true);
-		}
+		int pageMax = selectPage * PAGE_COUNT;
+		int pageMin = (selectPage - 1) * PAGE_COUNT + 1;
 
-		//取得開始位置を計算する
-		startCount = selectPage * PAGE_COUNT + 1;
 
-		//取得終了位置を計算する
-		if( (selectPage + 1 ) * PAGE_COUNT >  empDao.findAll().size() ){
-			endCount = empDao.findAll().size();
-		}else{
-			endCount = (selectPage + 1 ) * PAGE_COUNT;
-		}
+
+		List<Employee> empEntity = empDao.findAll(pageMin ,pageMax);
 
 
 
 		//1ページ表示する件数によって配列の大きさを変更する
-		UserEmpDto[] empDto = new UserEmpDto[ endCount - startCount + 1 ];
+		UserEmpDto[] empDto = new UserEmpDto[ empEntity.size() ];
 
 
 		//Entityへ取得開始⇔取得終了間のデータを格納する
 		//UserEmpDtoへEntityを格納後、ページング処理のためPageDtoへ格納する
-		pageDto.setUserEmpDto( this.setDtoFromEntity(empDto, empDao.findAll(startCount ,endCount) ) );
+		pageDto.setUserEmpDto( this.setDtoFromEntity(empDto, empEntity) );
+
+
+ 	   	if(selectPage != 1){
+ 		  pageDto.setHasPrev(true);
+		  }
+		if(PAGE_COUNT >=  empEntity.size() ){
+		  pageDto.setHasNext(true);
+		}
 
 		//PageDtoを返却する
 		return pageDto;
@@ -236,7 +234,9 @@ public class EmployeeService {
 
 
 
-		return empDto ;
+
+
+		return empDto;
 
 	}
 
@@ -249,8 +249,19 @@ public class EmployeeService {
 	 */
 	public int createData(ChangeForm changeForm ) {
 		EmployeeDAO empDao = new EmployeeDAO();
+		Employee empEntity = new Employee();
+
 		int count = 0;
-		count = empDao.insert( this.setEntityFromForm(changeForm) );
+
+
+		this.setEntityFromForm(empEntity, changeForm);
+
+		//empIdによってempEntityが正しくsetされていることを確認
+		if(empEntity.getEmpId() > 0){
+			count = empDao.insert( empEntity );
+		}
+
+
 
 		return count;
 
@@ -263,8 +274,15 @@ public class EmployeeService {
 	 */
 	public int updateData(ChangeForm changeForm) {
 		EmployeeDAO empDao = new EmployeeDAO();
+		Employee empEntity = new Employee();
+
 		int count = 0;
-		count = empDao.update( this.setEntityFromForm(changeForm) );
+		this.setEntityFromForm(empEntity, changeForm);
+
+		//empIdによってempEntityが正しくsetされていることを確認
+		if(empEntity.getEmpId() > 0){
+			count = empDao.update( empEntity );
+		}
 
 		return count;
 
@@ -366,12 +384,16 @@ public class EmployeeService {
 	 * @param empEntity
 	 * @return
 	 */
-	Employee setEntityFromForm(ChangeForm changeForm){
+	Employee setEntityFromForm(Employee empEntity,ChangeForm changeForm){
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 
-			Employee empEntity = new Employee();
+		InputCheck inputCheck = new InputCheck();
+
+
+		//入力データcheck
+		if( inputCheck.check(changeForm) ){
 			empEntity.setEmpId(changeForm.getEmpId());
 			empEntity.setEmpPass(changeForm.getEmpPass());
 			empEntity.setEmpName(changeForm.getEmpName());
@@ -388,6 +410,8 @@ public class EmployeeService {
 
 			empEntity.setAuthority(changeForm.getAuthority());
 			empEntity.setDeptId( changeForm.getDeptId() );
+		}
+
 
 
 		return empEntity;
@@ -403,6 +427,8 @@ public class EmployeeService {
 
 		DepartmentDAO deptDao = new DepartmentDAO();
 
+		InputCheck inputCheck = new InputCheck();
+		if( inputCheck.check(changeForm) ){
 			empDto.setEmpId(changeForm.getEmpId());
 			empDto.setEmpPass(changeForm.getEmpPass());
 			empDto.setEmpName(changeForm.getEmpName());
@@ -416,7 +442,7 @@ public class EmployeeService {
 			empDto.setDeptId( changeForm.getDeptId() );
 			// DepartmentDAO経由でDepartmentテーブルから部署名を取得する
 			empDto.setDeptName( deptDao.findById( changeForm.getDeptId() ).getDeptName() );
-
+		}
 
 		return empDto;
 	}

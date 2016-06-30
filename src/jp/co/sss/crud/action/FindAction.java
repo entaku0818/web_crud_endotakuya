@@ -1,7 +1,10 @@
 package jp.co.sss.crud.action;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.co.sss.crud.dto.PageDto;
 import jp.co.sss.crud.dto.UserEmpDto;
@@ -49,6 +52,8 @@ public final class FindAction extends Action {
 
 		//現在見ているページを宣言
     	int selectPage = 0;
+        Date date = new Date();
+        System.out.println(date.toString());
 
 
     	if (request.getParameter("pageNo") != null){
@@ -58,7 +63,7 @@ public final class FindAction extends Action {
 
 
 
-		//ユーザー情報を全件取得
+		//ユーザー情報を検索条件によって
 		PageDto pageDto = empService.getAllEmpData(findColumn, topForm, selectPage, PAGE_COUNT);
 
     	// 部署情報の動的なselectボタンのデータの生成
@@ -80,7 +85,25 @@ public final class FindAction extends Action {
 
             //Httpセッションへ部署情報を格納する
             request.setAttribute("selectDeptDto", selectDeptDto);
-            return (mapping.findForward("success"));
+
+
+
+            HttpSession session = request.getSession(true);
+            int authority = (Integer) session.getAttribute("authority");
+
+
+            //Httpセッションへログイン情報を格納する
+
+            Date date2 = new Date();
+            System.out.println(date2.toString());
+
+        	if ( authority == 2){
+        		return mapping.findForward("manege");
+        	}
+        	//最悪一般にすべるように・・・
+        	return mapping.findForward("general");
+
+
 
     }
 }

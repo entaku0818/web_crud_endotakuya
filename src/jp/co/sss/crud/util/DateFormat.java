@@ -19,5 +19,7 @@ public class DateFormat {
 	String daySql = sdf.format(date);
 
 	return daySql;
+
+
 	}
 }

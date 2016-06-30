@@ -1,7 +1,10 @@
 package jp.co.sss.crud.action;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.co.sss.crud.dto.PageDto;
 import jp.co.sss.crud.dto.UserEmpDto;
@@ -33,6 +36,11 @@ public final class TopAction extends Action {
 	 */
 	private static final int PAGE_COUNT = 10;
 
+
+
+	public PageDto pageDto = null;
+	public UserEmpDto[] userEmpDto = null;
+
 	public ActionForward execute(
         ActionMapping mapping,
         ActionForm form,
@@ -44,13 +52,14 @@ public final class TopAction extends Action {
     	DepartmentService deptService = new DepartmentService();
 
 
-
+        Date date = new Date();
+        System.out.println(date.toString());
 
     	//部署情報の動的なselectボタンのデータの生成
     	UserEmpDto[] selectDeptDto = deptService.getUserEmpDto();
 
     	//現在見ているページ
-    	int selectPage = 0;
+    	int selectPage = 1;
     	String errorMessage = null;
 
     	if (request.getParameter("pageNo") != null){
@@ -59,7 +68,7 @@ public final class TopAction extends Action {
     	}
 
     	//現在選択されているページのユーザー情報を取得
-    	PageDto pageDto = empService.getAllEmpData(selectPage, PAGE_COUNT);
+    	pageDto = empService.getAllEmpData(selectPage, PAGE_COUNT);
 
 
 
@@ -68,7 +77,7 @@ public final class TopAction extends Action {
     		errorMessage = request.getParameter("errorMessage");
     	}
 
-
+    	userEmpDto = pageDto.getUserEmpDto();
 
 		//Httpセッションへページ情報を格納する
         request.setAttribute("pageDto", pageDto);
@@ -83,6 +92,20 @@ public final class TopAction extends Action {
 		//Httpセッションへ部署情報を格納する
         request.setAttribute("errorMessage", errorMessage);
 
-    	return mapping.findForward("success");
+        HttpSession session = request.getSession(true);
+        int authority = (Integer) session.getAttribute("authority");
+
+
+        //Httpセッションへログイン情報を格納する
+        Date date2 = new Date();
+        System.out.println(date2.toString());
+    	if ( authority == 2){
+    		return mapping.findForward("manege");
+    	}
+    	//最悪一般にすべるように・・・
+    	return mapping.findForward("general");
+
+
+
     }
 }

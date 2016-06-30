@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import jp.co.sss.crud.dto.SysDataDto;
 import jp.co.sss.crud.dto.UserEmpDto;
@@ -47,7 +46,16 @@ public class UpdateAction extends LookupDispatchAction {
 
     	request.setAttribute("userEmpDto", userEmpDto);
 
-        return mapping.findForward("check");
+    	if(userEmpDto.getEmpId() > 0){
+            return mapping.findForward("check");
+    	}else{
+			SysDataDto SysDataDto = new SysDataDto();
+			SysDataDto.setErrorMessage( "不正な値が入力されました");
+	        request.setAttribute("SysDataDto", SysDataDto);
+    	}
+
+
+        return mapping.findForward("error");
     }
 
 
@@ -76,7 +84,7 @@ public class UpdateAction extends LookupDispatchAction {
 			SysDataDto.setErrorMessage( "更新処理が失敗しました");
 	        request.setAttribute("SysDataDto", SysDataDto);
         }
-    	
+
 
 
     	return mapping.findForward("error");

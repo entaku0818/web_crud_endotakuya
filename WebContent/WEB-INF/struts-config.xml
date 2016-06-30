@@ -20,13 +20,15 @@
     </action>
     <!-- TopActionの実装 -->
     <action path="/employee/top" name="topForm" type="jp.co.sss.crud.action.TopAction" validate="false">
-      <forward name="success" path="/employee/top.jsp"/>
+      <forward name="manege" path="/employee/admin/topAdmin.jsp"/>
+      <forward name="general" path="/employee/topGeneral.jsp"/>
     </action>
     <!-- FindActionの実装 -->
     <action path="/employee/find" name="topForm" type="jp.co.sss.crud.action.FindAction" scope="request" validate="true" input="/employee/top.jsp">
-      <forward name="success" path="/employee/top.jsp"/>
+      <forward name="manege" path="/employee/admin/topAdmin.jsp"/>
+      <forward name="general" path="/employee/topGeneral.jsp"/>
     </action>
-    <!-- Sample07 LookupDispatchActionの実装 -->
+    <!-- ChangeActionの実装の実装 -->
     <action path="/employee/change" name="topForm" type="jp.co.sss.crud.action.ChangeAction" parameter="method">
       <forward name="create" path="/employee/admin/create.jsp"/>
       <forward name="update" path="/employee/update.jsp"/>
@@ -37,6 +39,7 @@
     <action path="/employee/admin/create" name="changeForm" type="jp.co.sss.crud.action.CreateAction" parameter="method">
       <forward name="check" path="/employee/admin/chkCreate.jsp"/>
       <forward name="finish" path="/employee/admin/finCreate.jsp"/>
+      <forward name="error" path="/employee/top.do"/>
     </action>
     <!-- UpdateActionの実装 -->
     <action path="/employee/update" name="changeForm" type="jp.co.sss.crud.action.UpdateAction" parameter="method">

@@ -8,7 +8,7 @@ function findCheck(){
 	var findIdMin = 1;
 	var findIdMax = 99999;
 	var findNameMin = 1;
-	var findNameMax = 12;
+	var findNameMax = 15;
 
 	var flag = true;
 
@@ -65,7 +65,7 @@ function loginCheck(){
 	if(isNaN(!document.loginForm.id.value) || document.loginForm.id.value < idMin || document.loginForm.id.value > idMax ){
 
 		target = document.getElementById("chkIdMsg");
-		target.innerHTML =  '<font color="red">idは' + idMin + '文字以上' + idMax + '文字以下で入力してください</font>';
+		target.innerHTML =  '<font color="red">idは' + idMin + '以上' + idMax + '以下で入力してください</font>';
 		flag = false;
 	}
 

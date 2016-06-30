@@ -34,6 +34,9 @@ public class SysDataDto {
     private String empUpdate;
     private String empDelete;
 
+
+    private String[] employeeColumns;
+
     /**
 	 * @return empFindAll
 	 */
@@ -260,5 +263,21 @@ public class SysDataDto {
 	public void setDeptFindById(String deptFindById) {
 		this.deptFindById = deptFindById;
 	}
+
+	/**
+	 * @return employeeColumns
+	 */
+	public String[] getEmployeeColumns() {
+		return employeeColumns;
+	}
+
+	/**
+	 * @param employeeColumns セットする employeeColumns
+	 */
+	public void setEmployeeColumns(String[] employeeColumns) {
+		this.employeeColumns = employeeColumns;
+	}
+
+
 
 }

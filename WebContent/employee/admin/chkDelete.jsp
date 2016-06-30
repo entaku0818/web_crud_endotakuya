@@ -51,11 +51,12 @@
 
 						<!-- 登録内容Check ↓-->
 			<div class="change-contents">
+			<div class="change-message">以下の内容を削除します。</div>
 				<html:form styleClass="changeForm" method="POST" action="/employee/admin/delete.do" onsubmit="return changeCheck()">
 					<div class="form-group">
 		    			<span class="column">パスワード: </span>
 		    			<span class="value">
-		    			${userEmpDto.empPass}
+		    			****
 						</span>
 						<div id="chkEmpPassMsg"></div>
 					</div>

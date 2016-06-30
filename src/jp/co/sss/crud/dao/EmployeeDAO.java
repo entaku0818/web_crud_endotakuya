@@ -49,24 +49,7 @@ public class EmployeeDAO {
 
 
 
-    /**
-	*
-	*
-	* @return employeeテーブルの全件取得
-	*/
-	public List<Employee> findAll() {
-		SysDataImport sysDataImport = new SysDataImport();
 
-		String sql = sysDataImport.confImport().getEmpFindAll();
-
-		DBAccess access = new DBAccess();
-		List<Employee> empData = new ArrayList<Employee>();
-
-
-			empData = access.select(sql, allMapping);
-
-		return empData;
-	}
 
 
 
@@ -77,8 +60,8 @@ public class EmployeeDAO {
 	 */
 	public List<Employee> findAllById(int empId) {
 		SysDataImport sysDataImport = new SysDataImport();
-
-		String sql = sysDataImport.confImport().getEmpFindAllById();
+		String sql = null;
+		sql = sysDataImport.confImport().getEmpFindAllById();
 
 
 		DBAccess access = new DBAccess();
@@ -101,7 +84,8 @@ public class EmployeeDAO {
 
 
 		SysDataImport sysDataImport = new SysDataImport();
-		String sql = sysDataImport.confImport().getEmpFindAllByName();
+		String sql = null;
+		sql = sysDataImport.confImport().getEmpFindAllByName();
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();
@@ -149,7 +133,7 @@ public class EmployeeDAO {
 	public List<Employee> findAll(int stertCount, int endCount ) {
 
 		SysDataImport sysDataImport = new SysDataImport();
-		String sql = sysDataImport.confImport().getEmpFindAll() + sysDataImport.confImport().getPagingSQL();
+		String sql = sysDataImport.confImport().getEmpFindAll() + " " +  sysDataImport.confImport().getPagingSQL();
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();
@@ -169,7 +153,7 @@ public class EmployeeDAO {
 	 */
 	public List<Employee> findAllById(int empId, int stertCount, int endCount) {
 		SysDataImport sysDataImport = new SysDataImport();
-		String sql = sysDataImport.confImport().getEmpFindAllById() + sysDataImport.confImport().getPagingSQL();
+		String sql = sysDataImport.confImport().getEmpFindAllById() + " " + sysDataImport.confImport().getPagingSQL();
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();
@@ -188,7 +172,7 @@ public class EmployeeDAO {
 	 */
 	public List<Employee> findAllByName(String empName, int startCount,int endCount) {
 		SysDataImport sysDataImport = new SysDataImport();
-		String sql = sysDataImport.confImport().getEmpFindAllByName() + sysDataImport.confImport().getPagingSQL();
+		String sql = sysDataImport.confImport().getEmpFindAllByName() + " " + sysDataImport.confImport().getPagingSQL();
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();
@@ -214,7 +198,7 @@ public class EmployeeDAO {
 	public List<Employee> findAllByDeptId(int deptId, int startCount,
 			int endCount) {
 		SysDataImport sysDataImport = new SysDataImport();
-		String sql = sysDataImport.confImport().getEmpFindAllByDeptId() + sysDataImport.confImport().getPagingSQL();
+		String sql = sysDataImport.confImport().getEmpFindAllByDeptId() + " " + sysDataImport.confImport().getPagingSQL();
 
 		DBAccess access = new DBAccess();
 		List<Employee> empData = new ArrayList<Employee>();

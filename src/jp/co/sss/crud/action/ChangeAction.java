@@ -65,7 +65,7 @@ public class ChangeAction extends LookupDispatchAction {
 
 
     	DepartmentService deptService = new DepartmentService();
-    	//部署情報の動的なselectボタンのデータの生成
+    	//部署情報の動的なselectボタン用のデータの生成
     	UserEmpDto[] selectDeptDto = deptService.getUserEmpDto();
     	EmployeeService empService = new EmployeeService();
 
@@ -78,19 +78,27 @@ public class ChangeAction extends LookupDispatchAction {
 
     	HttpSession session = request.getSession(true);
     	int empId = (Integer) session.getAttribute("id");
+    	int authority = (Integer) session.getAttribute("authority");
 
         //Topページで指定したFindIdを取得
         findEmp.setEmpId(topForm.getFindId());
-        
+
         //Topページで指定したFindIdのデータを取得
         UserEmpDto userEmpDto = empService.getEmpData("empId",  findEmp);
 
         request.setAttribute("userEmpDto", userEmpDto);
-        
-        if(empId == findEmp.getEmpId() ){
-        	
+
+        if(empId == findEmp.getEmpId() || authority == 2 ){
+        	return mapping.findForward("update");
         }
-    	return mapping.findForward("update");
+
+		SysDataDto SysDataDto = new SysDataDto();
+		SysDataDto.setErrorMessage( "この操作を実行する権限はありません。");
+        request.setAttribute("SysDataDto", SysDataDto);
+
+
+
+        return mapping.findForward("top");
     }
 
     /**

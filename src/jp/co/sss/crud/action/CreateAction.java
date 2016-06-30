@@ -53,9 +53,6 @@ public class CreateAction extends LookupDispatchAction {
     	//Dtoの内容を画面へ表示
     	request.setAttribute("userEmpDto", userEmpDto);
 
-
-
-
         return mapping.findForward("check");
     }
 
